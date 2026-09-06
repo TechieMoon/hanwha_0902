@@ -12,11 +12,11 @@
 
 # 2026-09-03
 
-1. 파이썬 기초 문법(W3 schools)
+1. 파이썬 함수, 클래스(W3 schools)
 2. streamlit(간단한 웹 프레임워크)
 
 # 2026-09-04
 
 1. github, github desktop 사용법
 2. 파이썬 스트링, 클래스, 딕셔너리
-3. numpy, pandas 기초
+3. numpy 기초
