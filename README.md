@@ -20,7 +20,7 @@
 # 2026-09-03
 
 1. [파이썬 함수, 클래스](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0932/0903.ipynb)
-2. streamlit([가이드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0932/streamlit가이드.md), [테스트](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0932/test.py))
+2. streamlit([가이드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0903/streamlit가이드.md), [테스트](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0903/test.py))
 
 # 2026-09-04
 
