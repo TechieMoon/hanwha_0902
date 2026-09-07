@@ -16,3 +16,9 @@ user = User(
 print(user)
 print(user.age)
 print(type(user.age))
+
+# -------
+# name='Alice' age=25 email='alice@example.com'
+# 25
+# <class 'int'>
+# -------
