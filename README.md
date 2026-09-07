@@ -30,6 +30,6 @@
 
 # 2026-09-07
 
-1. Pydantic 실습([정리 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/Pydantic.md), [코드 1](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/pydantic.ipynb), [코드 2](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic01.py), [코드 3](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic02.py))
+1. Pydantic 실습([정리 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/Pydantic.md), [코드 1](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/pydantic.ipynb), [코드 2](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic01.py), [코드 3](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic02.py), [코드 4](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic03.py))
 2. [Python try...except 실습](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/try_except.ipynb)
 3. [깃허브 충돌 시 해결방법](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/깃충돌해결법.md)
