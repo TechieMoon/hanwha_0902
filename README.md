@@ -32,4 +32,4 @@
 
 1. [Pydantic 실습](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/pydantic.ipynb)
 2. [Python try...except 실습](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/try_except.ipynb)
-3. 깃허브 충돌 시 해결방법
+3. [깃허브 충돌 시 해결방법](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/깃충돌해결법.md)
