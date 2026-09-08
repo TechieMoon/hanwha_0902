@@ -33,3 +33,7 @@
 1. Pydantic 실습([정리 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/Pydantic.md), [코드 1](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/pydantic.ipynb), [코드 2](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic01.py), [코드 3](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic02.py), [코드 4](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic03.py))
 2. [Python try...except 실습](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/try_except.ipynb)
 3. [깃허브 충돌 시 해결방법](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/깃충돌해결법.md)
+
+# 2026-09-08
+
+1. FastAPI 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/fastapi_guide.md), [get](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/main.py), [put](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/get_put.py), [path parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/path_parameters.py), [query parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/query_parameters.py))
