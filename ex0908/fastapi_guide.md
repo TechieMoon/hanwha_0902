@@ -120,3 +120,46 @@ skip과 limit에 값을 대입하지 않았으므로 fake_items_db[0:10]을 반�
 `http://127.0.0.1:8000/items/?skip=1&limit=2` 결과는 [{"item_name":"Bar"},{"item_name":"Baz"}] 입니다.
 
 skip=1, limit=2이므로 fake_items_db[1:3]을 반환하기 때문입니다.
+
+# 매개변수 선택
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str, q: str | None = None):
+    if q:
+        return {"item_id": item_id, "q": q}
+    return {"item_id": item_id}
+```
+
+조건문을 넣어서 q가 존재하면 출력, 존재하지 않으면 출력하지 않음으로 매개변수를 선택할 수 있게 된다.
+
+# 매개변수 타입
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str, q: str | None = None, short: bool = False):
+    item = {"item_id": item_id}
+    if q:
+        item.update({"q": q})
+    if not short:
+        item.update(
+            {"description": "This is an amazing item that has a long description"}
+        )
+    return item
+```
+
+조건문 `if not short`를 통해 `item.update`를 실행하게 된다. 전달 받을 값을 타입 상관없이 마음껏 추가할 수 있다.
+
+short는 bool 타입이고, (1, True, true, on, yes와 같은 방법으로 값을 받을 수 있다.)
+
+예: `http://127.0.0.1:8000/items/foo?short=1` 접속하면 {"item_id":"foo"} 반환
