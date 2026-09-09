@@ -1,6 +1,6 @@
 # FastAPI GET 연습
 
-## GET 요청
+## 1. GET 요청
 
 ```python
 @app.get("/")
@@ -11,7 +11,7 @@ async def read_root():
 `127.0.0.1:8000` 접속
 {"message":"안녕~"} 반환
 
-## GET으로 변수 대입
+- GET으로 변수 대입
 
 ```python
 @app.get("/hello/{name}")
@@ -23,7 +23,7 @@ async def say_hello(name: str):
 {"message":"John님, 안녕하세요!"} 반환
 
 
-## GET으로 덧셈 요청
+- GET으로 덧셈 요청
 
 ```python
 @app.get("/add")
@@ -34,7 +34,7 @@ async def add(a: int, b: int):
 `127.0.0.1:8000/add?a=3&b=5` 접속
 {"result":8} 반환
 
-## GET으로 원하는 횟수만큼 반복하기
+- GET으로 원하는 횟수만큼 반복하기
 
 ```python
 @app.get("/greet")
@@ -45,7 +45,7 @@ async def greet(name: str, count: int = 1):
 `127.0.0.1:8000/greet?name=철수&count=5` 접속
 {"message":["철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!"]} 반환
 
-## POST 추가
+## 2. POST 추가
 
 ```python
 from pydantic import BaseModel
@@ -86,7 +86,7 @@ Response body
 }
 ```
 
-## DELETE 삭제
+## 3. DELETE 삭제
 
 ```python
 from fastapi import HTTPException
@@ -135,7 +135,7 @@ user_id에 1을 입력하고 테스트
 ```
 
 
-## PUT 수정
+## 4. PUT 수정
 
 ```python
 @app.put("/users/{user_id}")
