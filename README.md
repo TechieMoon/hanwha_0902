@@ -37,3 +37,7 @@
 # 2026-09-08
 
 1. FastAPI 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/fastapi_guide.md), [get](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/main.py), [put](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/get_put.py), [path parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/path_parameters.py), [query parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/query_parameters.py))
+
+# 2026-09-09
+
+1. FastAPI GET, POST([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/FastAPI%EC%97%B0%EC%8A%B5.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/main.py))

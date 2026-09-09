@@ -1,4 +1,4 @@
-# FastAPI 연습
+# FastAPI GET 연습
 
 
 ## GET 요청
@@ -46,8 +46,46 @@ async def greet(name: str, count: int = 1):
 `127.0.0.1:8000/greet?name=철수&count=5` 접속
 {"message":["철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!"]} 반환
 
+# FastAPI POST 연습
+
+## POST 요청
+
+```python
+from pydantic import BaseModel
 
 
+# 요청으로 받을 데이터의 구조
+class User(BaseModel):
+    name: str
+    age: int
 
 
+@app.post("/users")
+async def create_user(user: User):
+    return {
+        "message": f"{user.name}님이 등록되었습니다!",
+        "user": user.model_dump()
+    }
+```
+
+Request body
+
+```request body
+{
+  "name": "영희",
+  "age": 27
+}
+```
+
+Response body
+
+```response body
+{
+  "message": "영희님이 등록되었습니다!",
+  "user": {
+    "name": "영희",
+    "age": 27
+  }
+}
+```
 
