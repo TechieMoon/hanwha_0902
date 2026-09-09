@@ -1,6 +1,5 @@
 # FastAPI GET 연습
 
-
 ## GET 요청
 
 ```python
@@ -46,9 +45,7 @@ async def greet(name: str, count: int = 1):
 `127.0.0.1:8000/greet?name=철수&count=5` 접속
 {"message":["철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!","철수님, 안녕하세요!"]} 반환
 
-# FastAPI POST 연습
-
-## POST 요청
+## POST 추가
 
 ```python
 from pydantic import BaseModel
@@ -89,7 +86,7 @@ Response body
 }
 ```
 
-## DELETE 요청
+## DELETE 삭제
 
 ```python
 from fastapi import HTTPException
@@ -138,7 +135,7 @@ user_id에 1을 입력하고 테스트
 ```
 
 
-## PUT 요청
+## PUT 수정
 
 ```python
 @app.put("/users/{user_id}")
