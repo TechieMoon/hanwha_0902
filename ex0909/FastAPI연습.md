@@ -177,7 +177,7 @@ async def update_user(user_id: int, user: User):
 }
 ```
 
-## GET, POST, DELETE, PUT 요약
+## 5. GET, POST, DELETE, PUT 요약
 
 1. GET은 정보를 요청
 2. POST는 정보를 추가
