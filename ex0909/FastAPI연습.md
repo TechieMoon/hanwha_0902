@@ -89,3 +89,100 @@ Response body
 }
 ```
 
+## DELETE 요청
+
+```python
+from fastapi import HTTPException
+
+# 연습용 데이터: 사용자 ID가 key
+users = {
+    1: {"name": "철수", "age": 25},
+    2: {"name": "영희", "age": 27}
+}
+
+@app.delete("/users/{user_id}")
+async def delete_user(user_id: int):
+    if user_id not in users:
+        raise HTTPException(
+            status_code=404,
+            detail="해당 사용자가 없습니다."
+        )
+
+    deleted_user = users.pop(user_id)
+
+    return {
+        "message": "사용자가 삭제되었습니다.",
+        "user": deleted_user
+    }
+```
+
+/docs에서 테스트 
+user_id에 1을 입력하고 테스트
+
+```response body
+{
+  "message": "사용자가 삭제되었습니다.",
+  "user": {
+    "name": "철수",
+    "age": 25
+  }
+}
+```
+
+한 번 더 하면 이미 1번 유저는 삭제되었기 때문에 404 오류가 발생
+
+```response body
+{
+  "detail": "해당 사용자가 없습니다."
+}
+```
+
+
+## PUT 요청
+
+```python
+@app.put("/users/{user_id}")
+async def update_user(user_id: int, user: User):
+    if user_id not in users:
+        raise HTTPException(
+            status_code=404,
+            detail="해당 사용자가 없습니다."
+        )
+
+    users[user_id] = user.model_dump()
+
+    return {
+        "message": "사용자 정보가 수정되었습니다.",
+        "user": users[user_id]
+    }
+```
+
+1. `http://127.0.0.1:8000/docs`에서 테스트
+2. PUT /users/{user_id}에서 user_id에 2를 입력한다.
+3. Request body에 다음과 같이 입력한다.
+
+```request body
+{
+  "name": "카리나",
+  "age": 26
+}
+```
+
+4. 다음과 같이 반환된다.
+
+```response body
+{
+  "message": "사용자 정보가 수정되었습니다.",
+  "user": {
+    "name": "카리나",
+    "age": 26
+  }
+}
+```
+
+## GET, POST, DELETE, PUT 요약
+
+1. GET은 정보를 요청
+2. POST는 정보를 추가
+3. DELETE는 정보를 삭제
+4. PUT은 정보를 수정
