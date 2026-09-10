@@ -44,8 +44,8 @@
 
 # 2026-09-10
 
-1. [Python 딕셔너리]
-2. [Python if..else문]
-3. [Python match..case문]
-4. [Python while문]
-5. [Python for문]
+1. [Python 딕셔너리](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/dictionary.ipynb)
+2. [Python if..else문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/if_else.ipynb)
+3. [Python match..case문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/match_case.ipynb)
+4. [Python while문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/while.ipynb)
+5. [Python for문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/for.ipynb)
