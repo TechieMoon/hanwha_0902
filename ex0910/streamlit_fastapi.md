@@ -69,4 +69,5 @@ def process_data(data: UserInput):
 
 3. 결과
 
-![result]()
+![result](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/page.png)
+
