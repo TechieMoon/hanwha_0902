@@ -49,3 +49,4 @@
 3. [Python match..case문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/match_case.ipynb)
 4. [Python while문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/while.ipynb)
 5. [Python for문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/for.ipynb)
+6. FastAPI와 Streamlit 연결([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/streamlit_fastapi.md), [FastAPI 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_fastapi/main.py), [Streamlit 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_streamlit/app.py))
