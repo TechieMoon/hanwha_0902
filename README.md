@@ -41,3 +41,11 @@
 # 2026-09-09
 
 1. FastAPI GET, POST, DELETET, PUT([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/FastAPI%EC%97%B0%EC%8A%B5.md), [연습 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/main.py), [최종 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909_2/main.py))
+
+# 2026-09-10
+
+1. [Python 딕셔너리]
+2. [Python if..else문]
+3. [Python match..case문]
+4. [Python while문]
+5. [Python for문]
