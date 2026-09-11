@@ -54,3 +54,4 @@
 # 2026-09-11
 
 1. OpenAI API key 사용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/OpenAI%EA%B0%80%EC%9D%B4%EB%93%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/apikey_test.py))
+2. Langchain 프레임워크 연습([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/page92.ipynb))
