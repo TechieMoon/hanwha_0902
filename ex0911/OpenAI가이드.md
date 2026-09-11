@@ -18,6 +18,8 @@ print(response.output_text)
 
 OpenAI 라이브러리가 `OPENAI_API_KEY` 변수명을 알아서 찾기 때문에 코드에서 api key를 입력할 필요가 없다.
 
+---
+
 `.env`로도 가능하다.
 
 `.env.에 다음과 같이 저장한다.
