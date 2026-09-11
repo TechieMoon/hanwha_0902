@@ -50,3 +50,7 @@
 4. [Python while문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/while.ipynb)
 5. [Python for문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/for.ipynb)
 6. FastAPI와 Streamlit 연결([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/streamlit_fastapi.md), [FastAPI 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_fastapi/main.py), [Streamlit 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_streamlit/app.py))
+
+# 2026-09-11
+
+1. OpenAI API key 사용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/OpenAI%EA%B0%80%EC%9D%B4%EB%93%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/apikey_test.py))
