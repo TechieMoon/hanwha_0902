@@ -60,4 +60,4 @@
 
 1. .env로 OpenAI API 키 관리([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch03.ipynb))
 2. Langchain으로 ChatOpenAI 호출, 응답 메타데이터/토큰 사용량 확인, logprobs, 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04.ipynb))
-3. LangSmith 연동 및 Langchain 에이전트(Tool 호출) 실습 시작([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04_langsmith.ipynb))
+3. LangSmith 연동 및 Langchain 에이전트(Tool 호출) 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04_langsmith.ipynb))
