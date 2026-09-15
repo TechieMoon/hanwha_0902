@@ -61,3 +61,8 @@
 1. .env로 OpenAI API 키 관리([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch03.ipynb))
 2. Langchain으로 ChatOpenAI 호출, 응답 메타데이터/토큰 사용량 확인, logprobs, 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04.ipynb))
 3. LangSmith 연동 및 Langchain 에이전트(Tool 호출) 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04_langsmith.ipynb))
+
+# 2026-09-15
+
+1. PromptTemplate/ChatPromptTemplate 실습, partial_variables로 값 고정 및 동적 생성, yaml 파일로 프롬프트 관리([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/ch05.ipynb))
+2. 멀티모달(이미지 입력) LLM 호출 및 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/multimodal.ipynb))
