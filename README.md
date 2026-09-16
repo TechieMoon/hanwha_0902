@@ -66,3 +66,7 @@
 
 1. PromptTemplate/ChatPromptTemplate 실습, partial_variables로 값 고정 및 동적 생성, yaml 파일로 프롬프트 관리([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/ch05.ipynb))
 2. 멀티모달(이미지 입력) LLM 호출 및 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/multimodal.ipynb))
+
+# 2026-09-16
+
+1. Few-Shot Prompting(예시 기반 프롬프트) 실습, Self-Ask 스타일 예시로 단계적 추론 유도, FewShotPromptTemplate과 체인(prompt | llm | StrOutputParser) 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%ED%93%A8%EC%83%B7%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/fewshot.ipynb))
