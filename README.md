@@ -70,3 +70,4 @@
 # 2026-09-16
 
 1. Few-Shot Prompting(예시 기반 프롬프트) 실습, Self-Ask 스타일 예시로 단계적 추론 유도, FewShotPromptTemplate과 체인(prompt | llm | StrOutputParser) 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%ED%93%A8%EC%83%B7%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/fewshot.ipynb))
+2. Output Parser 실습, PydanticOutputParser로 이메일 본문을 구조화된 객체로 파싱, with_structured_output()과 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EC%95%84%EC%9B%83%ED%92%8B%ED%8C%8C%EC%84%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/output_parser.ipynb))
