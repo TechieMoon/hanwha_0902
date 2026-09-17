@@ -74,3 +74,8 @@
 3. Pandas 기초(Series/DataFrame), Titanic CSV 데이터 로드, 컬럼 선택 및 조건 필터링, loc/iloc 인덱싱 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%ED%8C%90%EB%8B%A4%EC%8A%A4%EA%B8%B0%EC%B4%88.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/csv.ipynb))
 4. CommaSeparatedListOutputParser로 쉼표 구분 답변을 파이썬 리스트로 파싱, invoke/stream 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EC%89%BC%ED%91%9C%EA%B5%AC%EB%B6%84%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%84%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/commaseparatedlist.ipynb))
 5. with_structured_output()으로 질문에 답변과 출처를 구조화된 객체로 받기 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EA%B5%AC%EC%A1%B0%ED%99%94%EB%90%9C%EC%B6%9C%EB%A0%A5.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/structured_output_parser.ipynb))
+
+# 2026-09-17
+
+1. LLM 응답 캐싱 실습, InMemoryCache/SQLiteCache로 동일 질문 재호출 시 응답 속도 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EC%BA%90%EC%8B%B1.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/cache.ipynb))
+2. 체인 직렬화(dumpd/dumps) 및 pickle/JSON 파일로 저장 후 다시 불러와 실행하기 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EB%AA%A8%EB%8D%B8%EC%A7%81%EB%A0%AC%ED%99%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/model_serialization.ipynb))
