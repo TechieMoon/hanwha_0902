@@ -79,3 +79,5 @@
 
 1. LLM 응답 캐싱 실습, InMemoryCache/SQLiteCache로 동일 질문 재호출 시 응답 속도 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EC%BA%90%EC%8B%B1.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/cache.ipynb))
 2. 체인 직렬화(dumpd/dumps) 및 pickle/JSON 파일로 저장 후 다시 불러와 실행하기 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EB%AA%A8%EB%8D%B8%EC%A7%81%EB%A0%AC%ED%99%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/model_serialization.ipynb))
+3. Google Gemini(ChatGoogleGenerativeAI) 호출, 프롬프트/체인 재사용, 안전 설정, 이미지 기반 멀티모달 시 생성 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EA%B5%AC%EA%B8%80%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/google_generative.ipynb))
+4. get_usage_metadata_callback으로 LLM 호출 토큰 사용량 추적 및 합산 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%ED%86%A0%ED%81%B0%EC%82%AC%EC%9A%A9%EB%9F%89.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/token_usage.ipynb))
