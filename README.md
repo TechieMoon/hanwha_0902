@@ -84,5 +84,5 @@
 
 # 2026-09-18
 
-1. 대화 메모리 실습, InMemoryChatMessageHistory와 RunnableWithMessageHistory로 세션별 대화 기록 유지([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EB%8C%80%ED%99%94%EB%A9%94%EB%AA%A8%EB%A6%AC.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/conversation_memory.ipynb))
+1. 대화 메모리 실습, InMemoryChatMessageHistory와 RunnableWithMessageHistory로 세션별 대화 기록 유지([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%8C%80%ED%99%94%EB%A9%94%EB%AA%A8%EB%A6%AC.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/conversation_memory.ipynb))
 2. Document Loader 실습, PyPDFLoader/PyMuPDF4LLMLoader로 PDF 불러오기, RecursiveCharacterTextSplitter로 청크 분할, load/lazy_load/aload/alazy_load 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%AC%B8%EC%84%9C%EB%A1%9C%EB%8D%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/document_loader.ipynb))
