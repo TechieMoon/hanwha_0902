@@ -86,3 +86,10 @@
 
 1. 대화 메모리 실습, InMemoryChatMessageHistory와 RunnableWithMessageHistory로 세션별 대화 기록 유지([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%8C%80%ED%99%94%EB%A9%94%EB%AA%A8%EB%A6%AC.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/conversation_memory.ipynb))
 2. Document Loader 실습, PyPDFLoader/PyMuPDF4LLMLoader로 PDF 불러오기, RecursiveCharacterTextSplitter로 청크 분할, load/lazy_load/aload/alazy_load 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%AC%B8%EC%84%9C%EB%A1%9C%EB%8D%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/document_loader.ipynb))
+
+# 2026-09-21
+
+1. CharacterTextSplitter 실습, separator/chunk_size 기준 텍스트 분할, create_documents()로 문서별 metadata 지정, split_text()와 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%EB%AC%B8%EC%9E%90%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/character_text_splitter.ipynb))
+2. RecursiveCharacterTextSplitter 실습, 여러 구분자를 순서대로 시도하는 재귀적 분할, chunk_overlap으로 조각 간 문맥 겹침 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%EC%9E%AC%EA%B7%80%EB%AC%B8%EC%9E%90%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/recursive_character_text_splitter.ipynb))
+3. 토큰/문장 기준 텍스트 분할 실습, CharacterTextSplitter.from_tiktoken_encoder와 TokenTextSplitter로 토큰 수 기준 분할, SpacyTextSplitter로 문장 경계 기준 분할 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%ED%86%A0%ED%81%B0%EB%AC%B8%EC%9E%A5%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/token_text_splitter.ipynb))
+4. HTMLHeaderTextSplitter 실습, HTML 제목 태그 구조 기준 분할 및 헤더 계층 metadata 부여, 실제 웹페이지(스탠퍼드 철학백과, CNN)에 적용하며 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML%ED%97%A4%EB%8D%94%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML_Header_text_splitter.ipynb))
