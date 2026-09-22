@@ -93,3 +93,8 @@
 2. RecursiveCharacterTextSplitter 실습, 여러 구분자를 순서대로 시도하는 재귀적 분할, chunk_overlap으로 조각 간 문맥 겹침 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%EC%9E%AC%EA%B7%80%EB%AC%B8%EC%9E%90%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/recursive_character_text_splitter.ipynb))
 3. 토큰/문장 기준 텍스트 분할 실습, CharacterTextSplitter.from_tiktoken_encoder와 TokenTextSplitter로 토큰 수 기준 분할, SpacyTextSplitter로 문장 경계 기준 분할 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%ED%86%A0%ED%81%B0%EB%AC%B8%EC%9E%A5%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/token_text_splitter.ipynb))
 4. HTMLHeaderTextSplitter 실습, HTML 제목 태그 구조 기준 분할 및 헤더 계층 metadata 부여, 실제 웹페이지(스탠퍼드 철학백과, CNN)에 적용하며 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML%ED%97%A4%EB%8D%94%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML_Header_text_splitter.ipynb))
+
+# 2026-09-22
+
+1. OpenAI Embeddings 실습, embed_query/embed_documents로 문장 벡터화, dimensions로 차원 축소, 코사인 유사도로 문장 간 의미 유사도 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/OpenAI%EC%9E%84%EB%B2%A0%EB%94%A9.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/openai_embeddings.ipynb))
+2. HuggingFace Embeddings 실습, Endpoint 원격 호출과 로컬 실행 비교, BAAI/bge-m3를 FlagEmbedding으로 직접 사용해 dense/sparse/ColBERT 세 가지 임베딩 방식 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/%ED%97%88%EA%B9%85%ED%8E%98%EC%9D%B4%EC%8A%A4%EC%9E%84%EB%B2%A0%EB%94%A9.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/huggingface_embeddings.ipynb))
