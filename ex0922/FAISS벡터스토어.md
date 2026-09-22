@@ -200,7 +200,7 @@ db.similarity_search(
 
 ## 6. 문서 추가
 
-`add_documents()`로 새 문서를 추가한다. 참고로 이 메서드가 받는 ID 지정 인자의 정식 이름은 `ids`인데, 아래 코드는 `idx`로 잘못 썼다. `FAISS.add_documents()`가 알 수 없는 키워드 인자를 그냥 무시하기 때문에 에러 없이 실행은 되지만, 실제로는 ID를 지정한 게 아니라 자동 생성된 ID가 부여된다.
+`add_documents()`로 새 문서를 추가한다. ID를 직접 지정하려면 `ids` 인자를 쓴다.
 
 ```python
 from langchain_core.documents import Document
@@ -212,14 +212,14 @@ db.add_documents(
             metadata={"source": "mydata.txt"},
         )
     ],
-    idx=["new_doc1"],
+    ids=["new_doc1"],
 )
 ```
 
 출력:
 
 ```txt
-['dedfd077-5c9f-4df7-b24b-69c980fa0e1f']
+['new_doc1']
 ```
 
 방금 추가한 문서가 검색되는지 확인한다.
@@ -231,7 +231,7 @@ db.similarity_search("안녕하세요",k=1)
 출력:
 
 ```txt
-[Document(id='dedfd077-5c9f-4df7-b24b-69c980fa0e1f', metadata={'source': 'mydata.txt'}, page_content='안녕하세요! 이번엔 문서를 새로 추가해볼게요.')]
+[Document(id='new_doc1', metadata={'source': 'mydata.txt'}, page_content='안녕하세요! 이번엔 문서를 새로 추가해볼게요.')]
 ```
 
 `add_texts()`로 텍스트를 추가한다(이번엔 `ids` 인자를 올바르게 사용).
@@ -270,7 +270,7 @@ db.index_to_docstore_id
  8: 'ffb573ad-1a36-411b-bd12-aa0b64317bc9',
  9: '4bd588af-7fdd-4869-a7e0-9a60d600d4d9',
  10: 'd95deef5-399f-48cc-be63-1cc348bb0d61',
- 11: 'dedfd077-5c9f-4df7-b24b-69c980fa0e1f',
+ 11: 'new_doc1',
  12: 'new_doc2',
  13: 'new_doc3'}
 ```
@@ -331,7 +331,7 @@ db.index_to_docstore_id
  8: 'ffb573ad-1a36-411b-bd12-aa0b64317bc9',
  9: '4bd588af-7fdd-4869-a7e0-9a60d600d4d9',
  10: 'd95deef5-399f-48cc-be63-1cc348bb0d61',
- 11: 'dedfd077-5c9f-4df7-b24b-69c980fa0e1f',
+ 11: 'new_doc1',
  12: 'new_doc2',
  13: 'new_doc3'}
 ```
@@ -375,7 +375,7 @@ loaded_db.index_to_docstore_id
  8: 'ffb573ad-1a36-411b-bd12-aa0b64317bc9',
  9: '4bd588af-7fdd-4869-a7e0-9a60d600d4d9',
  10: 'd95deef5-399f-48cc-be63-1cc348bb0d61',
- 11: 'dedfd077-5c9f-4df7-b24b-69c980fa0e1f',
+ 11: 'new_doc1',
  12: 'new_doc2',
  13: 'new_doc3'}
 ```
@@ -419,7 +419,7 @@ db.index_to_docstore_id
  8: 'ffb573ad-1a36-411b-bd12-aa0b64317bc9',
  9: '4bd588af-7fdd-4869-a7e0-9a60d600d4d9',
  10: 'd95deef5-399f-48cc-be63-1cc348bb0d61',
- 11: 'dedfd077-5c9f-4df7-b24b-69c980fa0e1f',
+ 11: 'new_doc1',
  12: 'new_doc2',
  13: 'new_doc3'}
 ```
@@ -467,10 +467,11 @@ db.index_to_docstore_id
  8: 'ffb573ad-1a36-411b-bd12-aa0b64317bc9',
  9: '4bd588af-7fdd-4869-a7e0-9a60d600d4d9',
  10: 'd95deef5-399f-48cc-be63-1cc348bb0d61',
- 11: 'dedfd077-5c9f-4df7-b24b-69c980fa0e1f',
+ 11: 'new_doc1',
  12: 'new_doc2',
  13: 'new_doc3',
- 14: '6b43a3e1-fcf8-480b-bba9-a9e2b6
+ 14: '6b43a3e1-fcf8-480b-bba9-a9e2b65356b1',
+ 15: '2e536893-5c37
 ... (일부 생략)
 ```
 
