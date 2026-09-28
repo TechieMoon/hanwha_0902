@@ -110,3 +110,7 @@
 5. Cohere Reranker 실습, Cohere 임베딩으로 1차 검색 후 Cohere 호스팅 rerank API(rerank-multilingual-v3.0)로 재정렬([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EC%BD%94%ED%9E%88%EC%96%B4%EB%A6%AC%EB%9E%AD%EC%BB%A4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/cohere-reranker.ipynb))
 6. WebBaseLoader 실습, BeautifulSoup SoupStrainer로 웹페이지 특정 영역만 파싱, 여러 URL 동시 로드와 nest_asyncio를 이용한 비동기 로드([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A1%9C%EB%8D%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/web_base_loader.ipynb))
 7. ParentDocumentRetriever 실습, 검색은 잘게 쪼갠 자식 조각으로 정밀하게 하고 반환은 더 큰 부모 단위로 돌려받는 구조, 부모 문서를 원본 그대로 두는 방식과 parent_splitter로 부모도 적당히 나누는 방식 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EB%B6%80%EB%AA%A8%EB%AC%B8%EC%84%9C%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/parent_document_retriever.ipynb))
+
+# 2026-09-28
+
+1. RAG 실습(Reranker 기반 사내 문서 QA), 가상 사내 문서 PDF + FAISS + Cross Encoder Reranker로 RAG 파이프라인 구성, 직접 작성한 첫 버전과 보강한 버전을 비교하며 유사도 threshold 대신 시스템 프롬프트로 "문서에 없는 답"을 판별하도록 설계([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/RAG%EC%8B%A4%EC%8A%B5.md), [코드 1(직접 작성)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_01_0928.ipynb), [코드 2(보강)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_02_0928.ipynb))
