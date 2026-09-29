@@ -114,3 +114,9 @@
 # 2026-09-28
 
 1. RAG 실습(Reranker 기반 사내 문서 QA), 가상 사내 문서 PDF + FAISS + Cross Encoder Reranker로 RAG 파이프라인 구성, 직접 작성한 첫 버전과 보강한 버전을 비교하며 유사도 threshold 대신 시스템 프롬프트로 "문서에 없는 답"을 판별하도록 설계([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/RAG%EC%8B%A4%EC%8A%B5.md), [코드 1(직접 작성)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_01_0928.ipynb), [코드 2(보강)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_02_0928.ipynb))
+
+# 2026-09-29
+
+1. PDF 문서 기반 RAG 기본 파이프라인 실습, 문서 로드 → 분할 → 임베딩 → FAISS 저장 → 리트리버 → 프롬프트 → LLM → 체인 8단계를 하나씩 실행한 뒤 한 셀로 통합([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RAG기본파이프라인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/rag-basic-pdf.ipynb))
+2. 문서 요약 실습, Stuff(한 번에 요약)/Map-Reduce(나눠 요약 후 합치기)/Map-Refine(요약을 순서대로 다듬기)/Chain of Density(반복하며 핵심 개체를 추가해 밀도 높이기) 네 가지 방식 비교, LangSmith Hub 프롬프트(`pull_prompt`)와 `@chain` 데코레이터 활용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/문서요약.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/summary.ipynb))
+3. RAGAS 0.4로 RAG 평가용 합성 테스트 데이터셋 생성, `TestsetGenerator`가 PDF에서 지식 그래프를 만들어 질문·정답·근거 문서를 자동 생성, synthesizer별 질문 유형 분포 지정과 한국어 프롬프트 적용 후 CSV 저장([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RAGAS테스트데이터셋.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/ragas_test_dataset.ipynb))
