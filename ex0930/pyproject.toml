@@ -1,0 +1,36 @@
+[project]
+name = "ex0930"
+version = "0.1.0"
+description = "RAG 실습 2 - 생성형 AI 윤리 가이드북 QA (FAISS + Cross Encoder Reranker)"
+readme = "README.md"
+authors = [
+    { name = "TechieMoon", email = "138311908+TechieMoon@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+# RAG.ipynb에서 직접 import 하는 패키지만 적는다.
+# (이 패키지들이 필요로 하는 나머지 패키지와 정확한 버전은 uv.lock에 고정됨)
+dependencies = [
+    "python-dotenv>=1.2.3",
+    "langchain-core>=1.6.5",
+    "langchain-community>=0.4",
+    "langchain-classic>=1.0.8",
+    "langchain-openai>=1.6.6",
+    "langchain-text-splitters>=1.1.2",
+    "faiss-cpu>=1.15.1",
+    "pypdf>=6.19.0",
+    "sentence-transformers>=6.1.0",
+]
+
+[dependency-groups]
+# 노트북 실행 도구 (uv sync 하면 기본으로 함께 설치됨)
+dev = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+]
+
+[project.scripts]
+ex0930 = "ex0930:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"

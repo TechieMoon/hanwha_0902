@@ -121,3 +121,7 @@
 2. 문서 요약 실습, Stuff(한 번에 요약)/Map-Reduce(나눠 요약 후 합치기)/Map-Refine(요약을 순서대로 다듬기)/Chain of Density(반복하며 핵심 개체를 추가해 밀도 높이기) 네 가지 방식 비교, LangSmith Hub 프롬프트(`pull_prompt`)와 `@chain` 데코레이터 활용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/문서요약.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/summary.ipynb))
 3. RAGAS 0.4로 RAG 평가용 합성 테스트 데이터셋 생성, `TestsetGenerator`가 PDF에서 지식 그래프를 만들어 질문·정답·근거 문서를 자동 생성, synthesizer별 질문 유형 분포 지정과 한국어 프롬프트 적용 후 CSV 저장([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RAGAS테스트데이터셋.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/ragas_test_dataset.ipynb))
 4. RunnablePassthrough 실습, 입력을 그대로 전달하는 `RunnablePassthrough()`와 기존 입력에 새 키를 추가하는 `.assign()` 비교, RunnableParallel 안에서의 동작 확인, RAG 체인에서 질문을 그대로 넘겨 context와 question을 동시에 구성([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RunnablePassthrough.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/runnable_passthrough.ipynb))
+
+# 2026-09-30
+
+1. RAG 실습 2(생성형 AI 윤리 가이드북 QA), 9월 28일에 만든 FAISS + Cross Encoder Reranker + 시스템 프롬프트 파이프라인을 30쪽 분량의 법·윤리 가이드북 PDF에 적용, 질문을 학생별 JSON 파일에서 불러오도록 변경, 문서 길이에 맞춰 검색 후보(k=8)와 Reranker 최종 문서 수(top_n=4) 조정, 참고 답안·근거 페이지 기준으로 채점해 3문제 모두 정답 확인, uv로 환경 구성([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG실습.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG.ipynb))
