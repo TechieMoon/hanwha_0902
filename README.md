@@ -125,3 +125,8 @@
 # 2026-09-30
 
 1. RAG 실습 2(생성형 AI 윤리 가이드북 QA), 9월 28일에 만든 FAISS + Cross Encoder Reranker + 시스템 프롬프트 파이프라인을 30쪽 분량의 법·윤리 가이드북 PDF에 적용, 질문을 학생별 JSON 파일에서 불러오도록 변경, 문서 길이에 맞춰 검색 후보(k=8)와 Reranker 최종 문서 수(top_n=4) 조정, 참고 답안·근거 페이지 기준으로 채점해 3문제 모두 정답 확인, uv로 환경 구성([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG실습.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG.ipynb))
+
+# 2026-10-01
+
+1. ChatOpenAI로 첫 LLM 호출, system/human 메시지로 한국어를 영어로 번역하는 예제로 에이전트 개발 환경 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/ChatOpenAI번역.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/translation.py))
+2. 랭그래프(LangGraph) 기본 개념 실습, TypedDict와 Pydantic의 상태 정의 차이(실행 시 타입 검사 여부), 리듀서(`add`, `add_messages`)로 상태 값 누적·교체, `StateGraph`에 노드·엣지·조건부 엣지 추가([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/랭그래프기본개념.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/try_langgraph.ipynb))
