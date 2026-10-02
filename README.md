@@ -130,3 +130,8 @@
 
 1. ChatOpenAI로 첫 LLM 호출, system/human 메시지로 한국어를 영어로 번역하는 예제로 에이전트 개발 환경 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/ChatOpenAI번역.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/translation.py))
 2. 랭그래프(LangGraph) 기본 개념 실습, TypedDict와 Pydantic의 상태 정의 차이(실행 시 타입 검사 여부), 리듀서(`add`, `add_messages`)로 상태 값 누적·교체, `StateGraph`에 노드·엣지·조건부 엣지 추가([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/랭그래프기본개념.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/try_langgraph.ipynb))
+
+# 2026-10-02
+
+1. 랭그래프로 에이전트 설계하고 구현하기, 입력·출력·전체 상태를 나눠(`input_schema`/`output_schema`) 답변만 돌려주는 기본 그래프와, 질문 길이를 검사해 짧으면 LLM을 부르지 않고 끝내는 가드레일 노드 + 조건부 엣지 그래프를 `compile()` → `invoke()`까지 실행([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/랭그래프에이전트구현.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/design_agent.ipynb))
+2. 타빌리(Tavily) 검색 도구와 LLM 도구 호출, `TavilySearch` 검색 결과 형식과 ToolCall 형식으로 실행했을 때의 `ToolMessage` 확인, `@tool` 계산 도구와 검색 도구를 `bind_tools()`로 연결해 LLM이 도구 이름·인자(검색어 영어 변환, `time_range` 자동 지정)를 스스로 정하는 것과 도구 설명서만큼 입력 토큰이 늘어나는 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/타빌리검색도구호출.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/tavily_search.ipynb))
