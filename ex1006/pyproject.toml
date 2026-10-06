@@ -31,4 +31,5 @@ dependencies = [
     "httpx>=0.28.1",
     "ipykernel>=7.4.0",
     "dotenv>=0.9.9",
+    "langgraph-api>=0.15.1",
 ]

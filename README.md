@@ -135,3 +135,7 @@
 
 1. 랭그래프로 에이전트 설계하고 구현하기, 입력·출력·전체 상태를 나눠(`input_schema`/`output_schema`) 답변만 돌려주는 기본 그래프와, 질문 길이를 검사해 짧으면 LLM을 부르지 않고 끝내는 가드레일 노드 + 조건부 엣지 그래프를 `compile()` → `invoke()`까지 실행([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/랭그래프에이전트구현.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/design_agent.ipynb))
 2. 타빌리(Tavily) 검색 도구와 LLM 도구 호출, `TavilySearch` 검색 결과 형식과 ToolCall 형식으로 실행했을 때의 `ToolMessage` 확인, `@tool` 계산 도구와 검색 도구를 `bind_tools()`로 연결해 LLM이 도구 이름·인자(검색어 영어 변환, `time_range` 자동 지정)를 스스로 정하는 것과 도구 설명서만큼 입력 토큰이 늘어나는 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/타빌리검색도구호출.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/tavily_search.ipynb))
+
+# 2026-10-06
+
+1. 랭그래프로 웹 검색 에이전트 만들기, LLM이 요청한 `tool_calls`를 실제로 실행하는 도구 노드(`BasicToolNode`)와 `tool_calls` 유무로 분기하는 라우팅 함수를 만들어 `chatbot ↔ tools` 반복 구조 구현, `invoke`/`stream`(updates·values·messages)/`ainvoke`/`astream` 실행 방법 비교, `langgraph.json` + `langgraph dev`로 랭그래프 서버를 띄워 LangSmith Studio에서 노드 실행 과정 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/웹검색에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/web_agent.py))

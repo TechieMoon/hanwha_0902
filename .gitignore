@@ -127,6 +127,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# LangGraph 개발 서버(langgraph dev)가 만드는 로컬 실행 기록
+.langgraph_api/
+
 # Environments
 .fast2venv
 .fastvenv
