@@ -30,3 +30,42 @@ agent = create_agent(
     tools=tools,
     middleware=[dynamic_model_selection]
 )
+
+if __name__ == "__main__":
+    from pathlib import Path 
+    from langgraph.checkpoint.memory import MemorySaver
+
+    save_path = Path(__file__).parent / "middleware_wrap_model_call.png"
+    graph_image = agent.get_graph().draw_mermaid_png()
+    with open(save_path, "wb") as f:
+        f.write(graph_image)
+
+    agent_with_memory = create_agent(
+        model=basic_model,
+        tools=tools,
+        middleware=[dynamic_model_selection],
+        checkpointer=MemorySaver()
+    )
+
+    config = {"configurable": {"thread_id": "test-thread"}}
+
+    questions = [
+        "15와 7을 더해주세요.",
+        "결과에 3을 곱해주세요.",
+        "그 결과에서 10을 빼주세요.",
+        "100을 5로 나눠주세요.",
+        "25와 25를 더해주세요.",
+        "1000에서 500을 빼주세요.",
+    ]
+
+    for i, question in enumerate(questions, 1):
+        print(f"\n{'=' * 50}")
+        print(f"🔄️ 턴 {i}: {question}")
+        print('=' * 50)
+
+        response = agent_with_memory.invoke(
+            {"messages": [question]},
+            config=config
+        )
+
+        print(f"🤖 응답: {response["messages"][-1].content}")

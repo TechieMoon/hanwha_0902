@@ -56,3 +56,37 @@ agent = create_agent(
         random_tone_prompt,
     ]
 )
+
+if __name__ == "__main__":
+    from pathlib import Path 
+
+    save_path = Path(__file__).parent / "middleware_with_node.png"
+    graph_image = agent.get_graph().draw_mermaid_png()
+
+    with open(save_path, "wb") as f:
+        f.write(graph_image) 
+
+    print("=" * 50)
+    print("테스트 1: 정상 입력")
+    print("=" * 50)
+    response = agent.stream({"messages": ["15와 7을 더해주세요."]})
+    for chunk in response:
+        for node, value in chunk.items():
+            if node:
+                print(f"\n--- {node} ---")
+            if value and "messages" in value:
+                print(value["messages"][0].content)
+
+    print("\n" + "=" * 50)
+    print("테스트 2: 금지어 포함 입력")
+    print("=" * 50)
+    try:
+        response = agent.stream({"messages": ["바보야 10과 5를 더해줘"]})
+        for chunk in response:
+            for node, value in chunk.items():
+                if node:
+                    print(f"\n--- {node} ---")
+                if value and "messages" in value:
+                    print(value["messages"][0].content)
+    except ValueError as e:
+        print(f"❌ 차단됨: {e}")
