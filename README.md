@@ -139,3 +139,7 @@
 # 2026-10-06
 
 1. 랭그래프로 웹 검색 에이전트 만들기, LLM이 요청한 `tool_calls`를 실제로 실행하는 도구 노드(`BasicToolNode`)와 `tool_calls` 유무로 분기하는 라우팅 함수를 만들어 `chatbot ↔ tools` 반복 구조 구현, `invoke`/`stream`(updates·values·messages)/`ainvoke`/`astream` 실행 방법 비교, `langgraph.json` + `langgraph dev`로 랭그래프 서버를 띄워 LangSmith Studio에서 노드 실행 과정 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/웹검색에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/web_agent.py))
+
+# 2026-10-07
+
+1. 코딩 에이전트 만들기, `@tool`·`parse_docstring`·pydantic `Field`로 LLM에게 전달되는 도구 설명서(이름·설명·인자 스키마) 비교, `exec()`로 코드를 실행하는 도구와 파일 저장 도구를 만들어 `create_agent`로 코드 작성 → 실행 확인 → 파일 저장 에이전트 구현, 실행 결과에서 병렬 도구 호출(`model → tools → tools → model`)과 print 출력이 LLM에게 전달되지 않는 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/코딩에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/agent.py), [도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/tools.py), [사용자 정의 도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/custom_tools.ipynb))
