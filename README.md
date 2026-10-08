@@ -143,3 +143,7 @@
 # 2026-10-07
 
 1. 코딩 에이전트 만들기, `@tool`·`parse_docstring`·pydantic `Field`로 LLM에게 전달되는 도구 설명서(이름·설명·인자 스키마) 비교, `exec()`로 코드를 실행하는 도구와 파일 저장 도구를 만들어 `create_agent`로 코드 작성 → 실행 확인 → 파일 저장 에이전트 구현, 실행 결과에서 병렬 도구 호출(`model → tools → tools → model`)과 print 출력이 LLM에게 전달되지 않는 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/코딩에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/agent.py), [도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/tools.py), [사용자 정의 도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/custom_tools.ipynb))
+
+# 2026-10-08
+
+1. create_agent 미들웨어와 구조화 출력, `@wrap_model_call`로 대화 길이에 따라 모델 교체(`gpt-4o-mini` → `gpt-4o`), `@before_model`로 금지어 차단(그래프에 노드 추가), `@dynamic_prompt`와 런타임 컨텍스트로 호출·사용자 역할마다 시스템 프롬프트 변경, `ToolStrategy`로 연락처 정보를 pydantic 객체로 추출, 실행 결과에서 미들웨어가 모델 호출마다 실행되는 점(두 번째 검사 대상은 도구 결과, 한 질문 안에서 말투 변경) 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent미들웨어.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent/middleware.py))
