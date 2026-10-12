@@ -148,3 +148,11 @@
 
 1. create_agent 미들웨어와 구조화 출력, `@wrap_model_call`로 대화 길이에 따라 모델 교체(`gpt-4o-mini` → `gpt-4o`), `@before_model`로 금지어 차단(그래프에 노드 추가), `@dynamic_prompt`와 런타임 컨텍스트로 호출·사용자 역할마다 시스템 프롬프트 변경, `ToolStrategy`로 연락처 정보를 pydantic 객체로 추출, 실행 결과에서 미들웨어가 모델 호출마다 실행되는 점(두 번째 검사 대상은 도구 결과, 한 질문 안에서 말투 변경) 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent미들웨어.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent/middleware.py))
 2. 벡터 데이터베이스에 문서 저장하고 검색하기, 264쪽 PDF(한글 맞춤법·표준어 규정 해설)를 `PyPDFLoader`로 불러와 500자 청크 510개로 나누고 `OpenAIEmbeddings`로 임베딩해 Chroma에 디스크 저장(`persist_directory`), "구개음화" 유사도 검색으로 관련 청크와 쪽 번호 확인, 셀을 다시 실행하면 같은 문서가 중복 저장되는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/벡터DB저장과검색.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/rag_agent/vector_retriever.ipynb))
+3. 검색 도구 만들기, 저장해 둔 Chroma DB를 다시 불러와 `as_retriever(k=3)`로 검색기를 만들고 `create_retriever_tool`로 에이전트용 검색 도구(`pdf_search`)로 감싸 "부엌이" 발음 질문으로 실행, 1순위(240쪽)에 정답이 있지만 관련 없는 청크도 섞이고 도구 결과에 쪽 번호가 빠지는 점, DB 경로가 틀리면 에러 없이 빈 결과가 나오는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/검색도구만들기.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/rag_agent/retriever.py))
+
+# 2026-10-12
+
+(이날부터 책 대신 강사님이 직접 만든 자료로 수업 진행)
+
+1. 다양한 방법으로 LLM 연동하기, Ollama 로컬 모델(`llama3.1`, `exaone3.5`)을 REST·OpenAI 호환 엔드포인트·`ollama` 라이브러리로 호출, Gemini를 OpenAI 호환 엔드포인트와 `google-genai` SDK로 호출, OpenAI `chat.completions`와 `responses` 비교, `previous_response_id`·`conversation`으로 서버 측 대화 기억, temperature 비교, 이미지 분석·생성(`gpt-image-2`)·스트리밍, 임베딩 코사인 유사도와 단어 벡터 연산(king − man + woman), 시스템·Few-shot·CoT 프롬프트([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/LLM연동하기.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/exam1.ipynb))
+2. LLM에 도구(Function) 연결하기, 파이썬 함수와 JSON Schema 명세로 도구를 만들고 `function_call` → 실행 → `function_call_output`을 반복하는 에이전트 루프 구현, 현재 시각 도구와 `wttr.in` 실시간 날씨 도구(인자 `location`)로 한 질문에 도구 호출이 여러 개 오는 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/도구호출.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/exam2.ipynb))
