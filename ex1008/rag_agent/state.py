@@ -1,6 +1,6 @@
-from langchain.graph import MessageState
+from langgraph.graph import MessagesState
 
-class AgentState(MessageState):
+class AgentState(MessagesState):
     question: str 
     context: str 
     answer: str 
