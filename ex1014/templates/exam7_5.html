@@ -1,0 +1,17 @@
+<!DOCTYPE html> <!-- HTML5 도큐먼트 선언  -->
+<!-- exam7_1.py /html5 — url_for(함수 이름, 경로 파라미터)로 엔드포인트 주소 만들기 -->
+<html>
+<head>
+    <title>Item Details</title>
+</head>
+<body>
+    <h1> url_for() 함수 뽀개기 (^^)</h1>
+    <hr>
+    <ul>
+    <li>{{ url_for('static', path=imgname) }}</li>
+    <li>{{ url_for('test3') }}</li>   
+    <li>{{ url_for('test4', shownum=100)}}</li>
+    <li>{{ url_for('test5') }}</li> 
+    </ul>
+</body>
+</html>

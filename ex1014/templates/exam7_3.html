@@ -1,0 +1,33 @@
+<!DOCTYPE html> <!-- HTML5 도큐먼트 선언  -->
+<!-- exam7_1.py /html3 — fd, ft는 서버가 넘긴 값, 아래 script는 브라우저 시간 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>어디출력될까?</title>
+<style>
+  div {
+    width : 70%;
+    text-align : center;
+    margin : 10px auto;
+    padding : 10px;
+    border-radius : 30px;
+    background-image : linear-gradient(45deg, lime, yellow)
+  }
+
+</style>
+</head>
+<body>
+<h1>데이터 전달</h1>
+<hr>
+<div>
+<h3>서버 기준 날짜 : {{ fd }}</h3>
+<h3>서버 기준 시간 : {{ ft }}</h3>
+</div>
+<div id="output"></div>
+<script>
+  const now = new Date();
+  const output = document.querySelector("#output");
+  output.innerHTML += `<h3>클라이언트 기준 날짜와 시간 : ${now.toLocaleString()}</h3>`;
+</script>
+</body>
+</html>

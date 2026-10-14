@@ -1,0 +1,13 @@
+<!DOCTYPE html> <!-- HTML5 도큐먼트 선언  -->
+<!-- exam8.py /items/{id} — 이미지와 다음 번호 링크 -->
+<html>
+<head>
+    <title>Item Details</title>
+    <link href="{{ url_for('static', path='/css/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>{{ id }}번 이미지</h1>  <!-- 수정: 여는 태그 없이 있던 </a> 삭제 -->
+    <img src="{{ url_for('static', path=img_name) }}">
+    <h2><a href="{{ url_for('read_item', id=nextid) }}">Item ID: {{ nextid }}</a></h2>
+</body>
+</html>

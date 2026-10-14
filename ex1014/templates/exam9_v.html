@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- exam9_1.py / — 폼 제출을 막고(e.preventDefault()) AJAX로 /calc를 호출해 결과만 출력 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Document</title>
+  <style>
+    h3 {
+      color : white;
+      text-shadow : 2px 2px 2px blue, -2px -2px 2px blue;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color:red">곱셈 연산(AJAX사용)</h1>
+  <hr>
+  <form>
+    <input name="num1" type="number" placeholder="숫자1을 입력하세요" required><br>
+    <input name="num2" type="number" placeholder="숫자2를 입력하세요" required><br>
+    <input type="submit" value="곱셈요청">
+  </form>
+  <hr>
+  <output></output>
+  <script>
+    document.querySelector("form").addEventListener("submit", function process(e) {
+      e.preventDefault();
+      const num1 = document.querySelectorAll("input[type='number']")[0].value;
+      const num2 = document.querySelectorAll("input[type='number']")[1].value;
+      const xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", function() {        
+        document.querySelector("output").innerHTML = `<h3>결과값 : ${JSON.parse(xhr.responseText).result}</h3>`;
+      });
+      xhr.open("GET", `/calc?num1=${num1}&num2=${num2}`, true);
+      xhr.send();
+    });
+  </script>
+</body>
+</html>
