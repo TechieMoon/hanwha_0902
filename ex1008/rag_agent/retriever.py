@@ -8,9 +8,12 @@ from dotenv import load_dotenv
 # .env의 OPENAI_API_KEY를 불러온다. (검색어를 임베딩할 때 필요)
 load_dotenv()
 
-# 6.5.2 노트북이 만든 벡터 DB 폴더. 실행한 위치(ex1008 폴더) 기준 상대 경로라서, 다른 위치에서 실행하면
-# 에러 없이 빈 DB가 새로 만들어지고 검색 결과도 비어 버린다.
-DB_PATH = "./rag_agent/chroma_db"
+# 6.5.2 노트북이 만든 벡터 DB 폴더.
+# 원래는 DB_PATH = "./rag_agent/chroma_db"처럼 실행한 위치(ex1008 폴더) 기준 상대 경로였다. 그러면 다른 위치에서 실행할 때
+# (예: rag_agent 폴더에서 langgraph dev) 에러 없이 빈 DB가 새로 만들어지고 검색 결과도 비어 버려서,
+# 어디서 실행해도 이 파일과 같은 폴더의 chroma_db를 찾도록 파일 위치 기준 경로로 바꿨다.
+from pathlib import Path
+DB_PATH = str(Path(__file__).parent / "chroma_db")
 
 # 저장해 둔 Chroma DB를 다시 불러온다. 임베딩을 새로 만들지 않으므로 API 비용이 들지 않는다.
 # 저장할 때와 같은 임베딩 모델, 같은 collection_name을 써야 한다. (검색어도 같은 모델로 벡터로 바꿔야 비교가 된다)
