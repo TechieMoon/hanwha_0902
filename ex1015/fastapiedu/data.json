@@ -1,0 +1,10 @@
+[
+    {
+      "content": "pgvector는 PostgreSQL에서 벡터 연산을 지원하는 확장 모듈입니다.",
+      "metadata": { "category": "db", "author": "admin", "source": "docs" }
+    },
+    {
+      "content": "임베딩(Embedding)은 텍스트를 고차원 숫자 벡터로 변환하는 기술입니다.",
+      "metadata": { "category": "ai", "author": "guest", "source": "wiki" }
+    }
+  ]

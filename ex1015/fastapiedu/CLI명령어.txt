@@ -1,0 +1,33 @@
+# 데이터 1개 추가 
+curl -X POST http://localhost:8000/api/vectors/add ^
+-H "Content-Type: application/json" ^
+-d "{\"content\":\"LangChain은 대형 언어 모델(LLM)에 외부 데이터와 다양한 도구를 손쉽게 연결하여, RAG나 AI 에이전트 같은 지능형 애플리케이션을 효율적으로 구축할 수 있도록 돕는 대표적인 개발 프레임워크입니다.\",\"metadata\":{\"category\":\"tech\"}}"
+
+# 데이터 여러개 추가 
+
+curl -X POST http://localhost:8000/api/vectors/add/batch ^
+-H "Content-Type: application/json" ^
+-d @data.json
+
+
+
+# 유사도 검색
+curl -X POST http://localhost:8000/api/vectors/search ^
+ -H "Content-Type: application/json" ^
+ -d "{\"query\":\"우리는 AI Agent 를 개발할거야.\",\"topK\":3,\"similarityThreshold\":0.3}"
+
+# 필터 검색
+curl -X POST http://localhost:8000/api/vectors/search/filter ^
+ -H "Content-Type: application/json" ^
+ -d "{\"query\":\"벡터\",\"topK\":3,\"similarityThreshold\":0.1,\"filterExpression\":\"category == 'db'\"}"
+
+curl -X POST http://localhost:8000/api/vectors/search/filter ^
+ -H "Content-Type: application/json" ^
+ -d "{\"query\":\"벡터\",\"topK\":3,\"similarityThreshold\":0.1,\"filterExpression\":\"category == 'ai'\"}"
+
+
+# RAG 답변
+curl -X POST http://localhost:8000/api/vectors/rag ^
+ -H "Content-Type: application/json" ^
+ -d "{\"question\":\"LangChain이 뭐야?\",\"topK\":3}"
+

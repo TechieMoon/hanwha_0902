@@ -3,6 +3,7 @@
 JSON만 돌려주는 API가 아니라 브라우저에 **HTML 페이지**를 보여 주는 방법을 실습했다. HTML 문자열을 직접 돌려주는 `HTMLResponse`, HTML 파일에 값을 채워 넣는 **Jinja2 템플릿**, 페이지 이동 없이 자바스크립트로 서버를 호출하는 **AJAX**를 비교했다. 실습하면서 HTML 태그(제목, 이미지, 링크, 목록, 폼)도 같이 익혔다.
 
 - 코드: [`exam7.py`](exam7.py), [`exam7_1.py`](exam7_1.py), [`exam8.py`](exam8.py), [`exam9.py`](exam9.py), [`exam9_1.py`](exam9_1.py), [`exam15_2.py`](exam15_2.py), 템플릿은 [`templates/`](templates/)
+- 강의 교안(PDF)은 강사님 자료라 저장소에는 넣지 않고, 내용을 5절에 요약했다.
 - 템플릿을 쓰려면 `jinja2` 패키지가 필요하다.
 
 ## 1. 템플릿 응답 (exam7)
@@ -82,6 +83,11 @@ window.setInterval(commAjax, 2000);
 ```
 
 `setInterval`로 2초마다 `/myfriend`(친구 5명 중 무작위 1명)를 호출해서 `<h3>`의 글자만 바꾼다. 페이지를 새로고침하지 않고 화면 일부만 계속 갱신하는 방식이다. 친구 목록은 서버가 켜질 때 lifespan에서 채운다([폼과파일업로드.md](폼과파일업로드.md)).
+
+## 5. 강의 교안 정리: Jinja2 템플릿
+
+- Jinja2는 파이썬용 웹 템플릿 엔진이다. FastAPI의 결과를 JSON이 아니라 HTML로 응답할 때 쓰고, `{{ 변수 }}` 자리에 서버가 넘긴 데이터를 채워 넣는다.
+- **교안 코드와 실습 코드의 차이**: 교안의 exam7, exam8은 `templates.TemplateResponse("exam7_1.html", {"request": request})`처럼 **템플릿 이름을 먼저** 넘기는 옛 방식이다. 수업에서 실행한 코드는 대부분 `TemplateResponse(request, "exam7_1.html")`로 바뀌어 있었는데, exam9_1만 옛 방식이 남아 있었다. 수업 환경(starlette 1.7.0)에서는 옛 방식이 `TypeError`를 내서 3절처럼 고쳤다. 다른 자료를 보고 따라 할 때 버전에 따라 호출 방식이 다를 수 있다.
 
 ## 정리
 
