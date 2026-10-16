@@ -1,5 +1,12 @@
 # HTMLHeaderTextSplitter 실습
 
+> **한눈에 보기**
+> - `HTMLHeaderTextSplitter`: `<h1>`, `<h2>` 같은 **제목 태그 구조**로 나누고, 어느 제목 아래인지 metadata에 남긴다
+> - 제목 단위 조각이 너무 길면 `RecursiveCharacterTextSplitter`로 한 번 더 자른다 (2단계 분할)
+> - 광고·스크립트가 섞인 실제 뉴스 페이지에서는 불필요한 텍스트도 함께 들어온다 → 전처리가 필요
+
+코드: [HTML_Header_text_splitter.ipynb](HTML_Header_text_splitter.ipynb)
+
 지금까지 다룬 분할기들은 글자 수·토큰 수·문장 경계처럼 텍스트의 "양"을 기준으로 나눴다면, `HTMLHeaderTextSplitter`는 HTML의 `<h1>`, `<h2>`, `<h3>` 같은 제목 태그 구조를 기준으로 나눈다. 제목 계층에 따라 나뉜 조각마다 "이 내용이 어떤 제목 아래에 있었는지"를 `metadata`로 함께 기록해주는 것이 특징이다. 간단한 예시 HTML로 먼저 동작을 확인한 뒤, 실제 웹페이지를 가져와 적용해봤다.
 
 ## 1. 기본 동작 확인
@@ -122,3 +129,23 @@ html_header_splits = html_splitter.split_text(response.text)
 ## 정리
 
 `HTMLHeaderTextSplitter`는 문서의 제목(heading) 구조를 그대로 metadata로 남기고 싶을 때 유용하다. 기술 문서나 위키처럼 제목 계층이 잘 갖춰진 페이지에서는 "이 조각이 어느 챕터/섹션에 속하는지" 알 수 있어 검색·요약 품질에 도움이 되지만, 광고나 스크립트가 많은 일반 웹페이지에서는 노이즈가 함께 섞여 들어올 수 있어 후처리(예: 빈 metadata 조각 걸러내기)가 필요할 수 있다. 실무에서는 이번처럼 `HTMLHeaderTextSplitter`로 구조를 먼저 잡고, `RecursiveCharacterTextSplitter`로 크기를 다시 맞추는 2단계 조합이 자주 쓰인다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. <code>headers_to_split_on</code>은 무엇을 정하나?</summary>
+
+어떤 태그를 제목으로 보고 나눌지와, metadata에 어떤 이름으로 남길지 (`("h1", "Header 1")` 등).
+</details>
+
+<details>
+<summary>2. 제목 기준으로 나눈 뒤 다시 글자 수로 나누는 이유는?</summary>
+
+한 섹션이 매우 길 수 있어서다. 제목 정보(metadata)는 유지하면서 크기를 맞추려고 두 분할기를 이어 쓴다.
+</details>
+
+<details>
+<summary>3. 뉴스 페이지에 적용했을 때 생긴 문제는?</summary>
+
+"Ad Feedback" 같은 광고 문구와 스크립트 조각까지 텍스트로 들어왔다. 필요한 영역만 골라 파싱하는 전처리가 필요하다.
+</details>

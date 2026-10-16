@@ -1,5 +1,11 @@
 # 오픈 API로 데이터 수집: 공공데이터와 네이버 검색
 
+> **한눈에 보기**
+> - HTML을 긁는 대신 기관·회사가 열어 둔 **오픈 API(REST)** 를 호출해 정리된 데이터(XML/JSON)를 받는다
+> - 인증키 위치는 API마다 다르다: 쿼리 파라미터 / URL 경로 / 요청 헤더
+> - XML은 `BeautifulSoup(..., "xml")`, JSON은 `response.json()`으로 파싱
+> - 키는 노트북에 쓰지 않고 환경변수로 바꿨다
+
 웹 페이지 HTML을 긁어 오는 대신, 기관이나 회사가 데이터를 가져가라고 열어 둔 **오픈 API(REST API)**를 호출했다. 인증키를 발급받아 URL이나 헤더에 넣어 요청하면 XML이나 JSON으로 정리된 데이터를 돌려준다. 서울시 버스·청소년 강좌·지하철 승하차 데이터와 네이버 블로그·뉴스 검색 결과를 수집했다.
 
 - 코드: [`dataexam/exam2.ipynb`](dataexam/exam2.ipynb)
@@ -111,3 +117,23 @@ setx NAVER_CLIENT_SECRET "발급받은_Client_Secret"
 | 네이버 검색 (`openapi.naver.com`) | 요청 헤더 | JSON | `response.json()` → 딕셔너리 |
 
 > 네이버 블로그·뉴스 검색 결과는 다른 사람이 쓴 글의 일부라 노트북 출력에는 앞부분만 남겼고, 결과 CSV는 저장소에 올리지 않았다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 웹 스크래핑보다 오픈 API가 좋은 점은?</summary>
+
+정해진 형식(XML/JSON)으로 데이터가 와서 파싱이 쉽고, 사이트 화면이 바뀌어도 깨지지 않으며, 허락된 방식이다.
+</details>
+
+<details>
+<summary>2. 네이버 검색 API는 인증 정보를 어디에 넣나?</summary>
+
+요청 헤더(`X-Naver-Client-Id`, `X-Naver-Client-Secret`).
+</details>
+
+<details>
+<summary>3. REST API에서 GET과 POST는 보통 무엇에 쓰나?</summary>
+
+GET은 조회, POST는 생성(데이터 보내기). 주소(URL)가 대상 자원을 가리킨다.
+</details>

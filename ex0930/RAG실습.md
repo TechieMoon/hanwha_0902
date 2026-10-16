@@ -1,5 +1,13 @@
 # RAG 실습 2 — 생성형 AI 윤리 가이드북 QA (Reranker)
 
+> **한눈에 보기**
+> - 9/28 파이프라인을 **다른 성격의 더 긴 문서**(30쪽 생성형 AI 윤리 가이드북)에 적용
+> - 길어진 문서에 맞춰 후보 `k=8`, 재정렬 후 `top_n=4`로 늘림
+> - 질문은 JSON 파일(내 번호 11번)에서 불러와, 참고 답안·근거 페이지로 검색과 답변을 따로 채점 → 3/3 정확
+> - 환경은 uv(`pyproject.toml` + `uv.lock`)로 구성
+
+코드: [RAG.ipynb](RAG.ipynb) · 질문: [students/student_11_questions.json](students/student_11_questions.json)
+
 9월 28일에 만든 **FAISS + Cross Encoder Reranker + 시스템 프롬프트** RAG 파이프라인을 새로운 문서인 `생성형_AI윤리_가이드북_RAG시험용_30쪽.pdf`에 적용했다. 질문은 코드에 직접 쓰지 않고, 학생별로 나눠 받은 질문 파일(`students/student_11_questions.json`)에서 불러온다.
 
 | 항목 | 9월 28일 (사내 업무 가이드) | 오늘 (AI 윤리 가이드북) |
@@ -78,3 +86,23 @@ compression_retriever = ContextualCompressionRetriever(
 - 질문을 JSON 파일에서 불러오게 바꿔서, `STUDENT_NUMBER`만 바꾸면 다른 질문 세트로 바로 다시 실험할 수 있다.
 - 질문 파일에 참고 답안과 근거 페이지가 함께 있어서, 이번에는 PDF를 직접 읽지 않고도 **검색(근거 페이지를 찾았는가)과 답변(내용이 맞는가)을 따로 채점**할 수 있었다.
 - 환경을 pip 대신 uv(`pyproject.toml` + `uv.lock`)로 구성했다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 문서가 길어지면 <code>k</code>와 <code>top_n</code>을 늘리는 이유는?</summary>
+
+비슷한 내용의 청크가 많아져, 정답 청크가 후보와 최종 목록에 들어오도록 여유를 두기 위해서다.
+</details>
+
+<details>
+<summary>2. 근거가 두 페이지에 흩어진 3번 질문에서 배운 점은?</summary>
+
+한 페이지(p.16)는 상위 4개에 못 들었다. 근거가 여러 곳인 질문에서는 `top_n`을 늘리는 것을 고려한다.
+</details>
+
+<details>
+<summary>3. <code>uv sync</code>는 무엇을 하나?</summary>
+
+`pyproject.toml`과 `uv.lock`에 적힌 버전대로 `.venv`를 만들고 패키지를 설치한다.
+</details>

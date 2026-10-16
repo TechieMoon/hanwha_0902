@@ -1,5 +1,13 @@
 # OpenAI Embeddings 실습
 
+> **한눈에 보기**
+> - **임베딩**: 텍스트를 의미를 담은 숫자 벡터로 바꾸는 것. 의미가 비슷하면 벡터도 가깝다
+> - `embed_query(문장)`은 질문 하나, `embed_documents([...])`는 문서 여러 개
+> - `text-embedding-3-small`은 기본 1536차원, `dimensions=1024`처럼 줄일 수 있다
+> - 코사인 유사도 결과: 비슷한 한국어 문장 0.96 > 같은 뜻 영어 0.48 > 다른 뜻
+
+코드: [openai_embeddings.ipynb](openai_embeddings.ipynb)
+
 텍스트를 벡터(숫자 배열)로 변환하는 임베딩(embedding)을 OpenAI의 임베딩 모델로 실습했다. 문장 하나를 벡터로 바꾸는 것부터, 여러 문장을 한 번에 임베딩하기, 벡터 차원 수 조절하기, 그리고 임베딩 벡터끼리 코사인 유사도(cosine similarity)로 문장 간 의미적 유사성을 비교하는 것까지 다뤘다.
 
 ## 1. 임베딩 모델 준비 및 문장 벡터화
@@ -99,3 +107,29 @@ for i, sentence in enumerate(embedded_sentences):
 - `embed_documents([text, ...])` : 여러 문장을 한 번에 벡터로 변환. 문서 집합을 임베딩할 때 사용.
 - `dimensions` : 임베딩 벡터의 차원 수를 모델 기본값보다 줄일 수 있는 옵션(저장 공간/속도 vs 정밀도 트레이드오프).
 - 코사인 유사도로 벡터 사이의 거리를 재면, 의미가 비슷한 문장일수록 값이 1에 가깝고 무관한 문장일수록 0에 가까워진다. 이 원리가 이후 배울 벡터 검색(유사도 기반 문서 검색)의 기반이 된다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. <code>embed_query</code>와 <code>embed_documents</code>는 각각 언제 쓰나?</summary>
+
+검색 질문 하나를 벡터로 만들 때 `embed_query`, 저장할 문서 여러 개를 한 번에 만들 때 `embed_documents`.
+</details>
+
+<details>
+<summary>2. 임베딩 차원을 줄이면 얻는 것과 잃는 것은?</summary>
+
+저장 공간과 계산 속도는 좋아지지만, 의미를 담는 정밀도가 조금 떨어질 수 있다.
+</details>
+
+<details>
+<summary>3. 코사인 유사도가 1에 가깝다는 것은?</summary>
+
+두 벡터의 방향이 거의 같다, 즉 두 문장의 의미가 매우 비슷하다는 뜻이다.
+</details>
+
+<details>
+<summary>4. 같은 뜻의 한국어·영어 문장 유사도가 낮게 나온 것에서 알 수 있는 점은?</summary>
+
+임베딩 모델에 따라 언어가 다르면 같은 뜻이어도 거리가 멀 수 있다. 문서와 질문의 언어를 맞추거나 다국어 모델을 쓰는 것이 좋다.
+</details>

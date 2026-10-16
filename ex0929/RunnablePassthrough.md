@@ -1,5 +1,12 @@
 # RunnablePassthrough 실습
 
+> **한눈에 보기**
+> - `RunnablePassthrough()`: 입력을 그대로 다음 단계로 넘긴다
+> - `RunnablePassthrough.assign(키=함수)`: 입력 dict는 그대로 두고 새 키를 추가한다
+> - 체인 안의 dict는 `RunnableParallel`: 같은 입력을 여러 곳에 동시에 넣고 키별로 모은다
+
+코드: [runnable_passthrough.ipynb](runnable_passthrough.ipynb)
+
 `RunnablePassthrough`는 **입력을 아무것도 바꾸지 않고 그대로 다음 단계로 넘겨주는** Runnable이다. 단독으로는 하는 일이 없어 보이지만, 체인 중간에서 "원래 입력을 유지한 채 다른 값을 함께 만들어야 할 때" 꼭 필요하다. 입력을 그대로 넘기는 방법, `assign()`으로 새 키를 덧붙이는 방법, 그리고 RAG 체인에서 질문을 그대로 전달하는 방법을 실습한다.
 
 ## 1. 환경변수 로드
@@ -145,3 +152,17 @@ retrieval_chain.invoke("가우스의 직업은 무엇입니까?")
 | `RunnablePassthrough()` | 입력을 그대로 전달 | RAG 체인에서 질문을 프롬프트까지 그대로 넘길 때 |
 | `RunnablePassthrough.assign(key=함수)` | 입력 딕셔너리를 유지하고 새 키를 추가 | 기존 값은 두고 계산 결과를 덧붙일 때 |
 | `RunnableParallel(...)` / 체인 안의 딕셔너리 | 같은 입력을 여러 Runnable에 동시에 넣고 결과를 키별로 모음 | 프롬프트 변수 여러 개를 한 번에 만들 때 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. <code>{"num": 1}</code>에 <code>RunnablePassthrough.assign(mult=lambda x: x["num"] * 3)</code>을 적용하면?</summary>
+
+`{"num": 1, "mult": 3}`
+</details>
+
+<details>
+<summary>2. RAG 체인에서 질문 하나만 넣었는데 context와 question이 모두 채워지는 이유는?</summary>
+
+앞의 dict(RunnableParallel)가 같은 질문을 retriever와 RunnablePassthrough에 동시에 넣기 때문이다.
+</details>

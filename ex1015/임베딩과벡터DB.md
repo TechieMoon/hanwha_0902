@@ -1,5 +1,11 @@
 # 임베딩과 벡터 DB (pgvector)
 
+> **한눈에 보기**
+> - **임베딩**: 텍스트의 의미를 숫자 벡터로 (`text-embedding-3-small`은 1536차원)
+> - **pgvector**: PostgreSQL에 `vector` 타입과 거리 연산자를 더한 확장 (로컬 도커로 실습)
+> - `<=>`는 **코사인 거리**: 유사도 = 1 − 거리, 정렬은 거리 **오름차순**
+> - `LIMIT`만 쓰면 관련 없는 문서도 나온다 → 실제 값을 보고 임계값을 정한다
+
 RAG의 바탕이 되는 **임베딩**과 **벡터 DB**를 배웠다. 강의 교안으로 개념을 익히고, 로컬 도커로 띄운 **pgvector**(PostgreSQL에 벡터 기능을 더한 확장)에 OpenAI 임베딩을 저장한 뒤 SQL로 유사도 검색을 해 봤다. 두 문장의 유사도를 돌려주는 FastAPI 서버도 만들었다.
 
 - 코드: [`exam3.ipynb`](exam3.ipynb) (앞부분, mydoc1 실험), [`fastapiedu/exam20.py`](fastapiedu/exam20.py)
@@ -136,3 +142,29 @@ ORDER BY distance;
 | pgvector | PostgreSQL 확장. `vector` 타입, `<=>`(코사인 거리), HNSW·IVFFlat 인덱스 |
 | 거리 vs 유사도 | `<=>`는 거리. 유사도 = 1 − 거리, 정렬은 거리 오름차순 |
 | 임계값 | `LIMIT`만으로는 관련 없는 문서도 나온다. 실제 데이터의 값을 보고 기준을 정한다 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. <code>ORDER BY embedding &lt;=&gt; 질문벡터</code>를 오름차순으로 하는 이유는?</summary>
+
+`<=>`는 거리라서 작을수록 가깝다(비슷하다).
+</details>
+
+<details>
+<summary>2. 코사인 거리 0.2는 코사인 유사도로 얼마인가?</summary>
+
+0.8 (유사도 = 1 − 거리).
+</details>
+
+<details>
+<summary>3. HNSW·IVFFlat 인덱스는 왜 쓰나?</summary>
+
+모든 벡터와 거리를 계산하지 않고 근사적으로 빠르게 가까운 벡터를 찾기 위해서다.
+</details>
+
+<details>
+<summary>4. 임계값을 정할 때 주의할 점은?</summary>
+
+모델과 데이터마다 거리 분포가 달라서 정답이 없다. 관련 있는 문서와 없는 문서의 실제 거리를 보고 정한다.
+</details>

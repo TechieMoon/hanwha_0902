@@ -1,5 +1,10 @@
 # OpenAI 도구 3가지: Function, 빌트인, MCP
 
+> **한눈에 보기**
+> - OpenAI 도구 3종류: **Function**(내 코드가 실행) / **빌트인**(`web_search` 등, OpenAI가 실행) / **MCP**(외부 MCP 서버)
+> - 좋은 Tool Schema: 이름은 동작이 드러나게, 설명은 언제 쓰는지까지, 인자는 형식·예시와 함께
+> - 우리 서비스만의 기능은 함수 도구로, 흔한 기능은 빌트인으로, 이미 있는 MCP 서버는 MCP 툴로
+
 10월 12일에는 직접 만든 파이썬 함수를 도구(function tool)로 연결하고 에이전트 루프를 짰다. 이날은 그 뒷부분으로, 좋은 도구 명세(Tool Schema)를 쓰는 원칙과 OpenAI가 제공하는 나머지 두 종류의 도구인 **빌트인 툴**과 **MCP 툴**을 실습했다.
 
 - 코드: [`exam2.ipynb`](exam2.ipynb) (강사님 자료 `exam2.ipynb`의 뒷부분만 정리. 앞부분은 [`../ex1012/exam2.ipynb`](../ex1012/exam2.ipynb), 정리 문서는 [`../ex1012/도구호출.md`](../ex1012/도구호출.md))
@@ -110,3 +115,23 @@ print(response.output_text)
 | MCP 툴 | `{"type": "mcp", "server_url", "allowed_tools", ...}` | 외부 MCP 서버 (OpenAI가 호출) | 서버 주소와 허용할 도구만 지정 |
 
 내 서비스만의 기능(우리 DB 조회 등)은 함수 도구로, 웹 검색처럼 흔한 기능은 빌트인 툴로, 이미 누군가 MCP 서버로 만들어 둔 기능은 MCP 툴로 붙이면 된다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 빌트인 툴 <code>web_search</code>를 쓰면 내가 할 일은?</summary>
+
+`tools=[{"type": "web_search"}]`처럼 타입만 지정한다. 실행과 결과 처리는 OpenAI 서버가 한다.
+</details>
+
+<details>
+<summary>2. MCP 툴 설정에서 <code>allowed_tools</code>를 지정하는 이유는?</summary>
+
+MCP 서버가 가진 도구 중 필요한 것만 모델이 쓰게 제한해서, 원치 않는 동작과 불필요한 토큰을 막기 위해서다.
+</details>
+
+<details>
+<summary>3. Function tool과 MCP 툴의 실행 주체 차이는?</summary>
+
+Function tool은 내 코드가 실행하고 결과를 돌려줘야 하고, MCP 툴은 OpenAI가 외부 MCP 서버를 직접 호출한다.
+</details>

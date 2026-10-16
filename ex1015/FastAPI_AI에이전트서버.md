@@ -1,5 +1,11 @@
 # 도구를 쓰는 AI 에이전트를 FastAPI 서버로 만들기
 
+> **한눈에 보기**
+> - 10/12의 "LLM + 도구 + 에이전트 루프"를 **REST API 서버**(`POST /chat`)로 만들고 Streamlit 채팅 화면을 붙였다
+> - `session_id`별 대화 기록을 서버에 보관해 대화를 이어 간다
+> - `MAX_STEPS = 5`로 도구 호출 무한 반복 방지
+> - 계산 도구는 `eval()` 대신 `ast`로 허용한 연산만 + **결과 크기 제한** (직접 찾아 고친 부분)
+
 10/12에 노트북에서 만든 "LLM + 도구 + 에이전트 루프"를 **REST API 서버**로 만들고, Streamlit으로 채팅 화면을 붙였다. 에이전트 '유니코'는 시간 조회, 계산, 주사위, 점심 메뉴 추천 도구 4개를 쓰고, `session_id`로 대화를 이어 간다.
 
 - 코드: [`fastapiedu/exam19.py`](fastapiedu/exam19.py) (서버), [`fastapiedu/exam19_client.py`](fastapiedu/exam19_client.py) (Streamlit 화면)
@@ -101,3 +107,23 @@ return "생각이 너무 길어져서 멈췄어요. ...", tool_logs
 | 무한 루프 방지 | `MAX_STEPS = 5` |
 | 안전한 계산 | `eval()` 대신 `ast` + 허용 연산자 목록 + 결과 크기 제한 |
 | 화면 분리 | Streamlit이 `requests`로 API 호출 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 계산 도구에서 <code>eval()</code>을 쓰면 안 되는 이유는?</summary>
+
+사용자 입력(또는 LLM이 만든 식)이 임의의 파이썬 코드로 실행될 수 있다.
+</details>
+
+<details>
+<summary>2. 지수 크기만 제한하던 방식의 문제와 고친 방법은?</summary>
+
+`((10**1000)**1000)**1000`처럼 거듭제곱을 겹치면 우회됐다. 결과 크기를 미리 추정해(`지수 × 밑의 비트 수`) 한도를 넘으면 막았다.
+</details>
+
+<details>
+<summary>3. 세션별 대화 기록을 메모리 dict에 두면 생기는 한계는?</summary>
+
+서버를 재시작하면 사라지고, 서버를 여러 대 두면 공유되지 않는다. 실제 서비스는 DB나 Redis에 둔다.
+</details>

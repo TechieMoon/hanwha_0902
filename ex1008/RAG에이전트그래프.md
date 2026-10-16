@@ -1,5 +1,11 @@
 # 랭그래프로 RAG 에이전트 만들기
 
+> **한눈에 보기**
+> - 검색기를 랭그래프로 감싼 **RAG 에이전트**: 검색 여부 판단 → 검색 → 정리 → 관련성 평가 → (부족하면 질문 다시 쓰기) → 답변 → 환각 평가
+> - 평가 노드는 `with_structured_output`으로 `yes`/`no`를 받아 조건부 엣지로 분기
+> - 재검색·재생성은 각각 **최대 3번**(`retry_num`, `generate_num`)으로 제한해 무한 반복을 막았다
+> - 직접 찾아 고친 문제: 무한 재생성(`GraphRecursionError`), 문자열 메시지로 인한 `AttributeError`, 질문 사이에 이어지는 횟수, LLM 정리 단계가 원문을 바꾸던 문제
+
 앞에서 PDF(한글 맞춤법·표준어 규정 해설)를 Chroma 벡터 DB에 저장하고([벡터DB저장과검색.md](벡터DB저장과검색.md)), 검색기와 검색 도구를 만들었다([검색도구만들기.md](검색도구만들기.md)). 이번에는 그 검색기를 랭그래프 그래프에 넣어 **문서를 근거로 답하는 RAG 에이전트**를 완성했다(교재 6.5.4 ~ 6.5.5). 단순히 "검색 → 답변"으로 끝나지 않고, 검색 결과로 질문에 답할 수 있는지, 답변이 검색 결과에 근거하는지를 LLM이 **스스로 평가**해서 질문을 다시 쓰거나 답변을 다시 만드는 구조다.
 
 - 코드: [`rag_agent/`](rag_agent/) (`state.py`, `nodes.py`, `edges.py`, `agent.py`, `langgraph.json`, 검색기는 [`retriever.py`](rag_agent/retriever.py))
@@ -236,3 +242,35 @@ Page 24: 는 부사 파생 접미사가 결합하여 부사가 되었으므로 �
 | 질문 다시 쓰기 | `transform_query` → `retriever` | 벡터 검색에 맞게 질문 변환 |
 | 답변 평가 | `with_structured_output(GradeHallucinations)` | 근거 없으면 다시 생성 (최대 3번) |
 | 출처 표시 | `Page {page+1}: 내용` + 프롬프트 지시 | 답변에 쪽 번호를 붙여 근거 제시 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. RAG 에이전트가 일반 RAG 체인과 다른 점은?</summary>
+
+검색할지 스스로 판단하고, 검색 결과와 답변을 평가해서 부족하면 질문을 바꿔 다시 검색하거나 답을 다시 만든다.
+</details>
+
+<details>
+<summary>2. 재검색과 재생성 횟수를 상태에 두고 제한하는 이유는?</summary>
+
+평가가 계속 `no`면 그래프가 끝없이 돌아 `GraphRecursionError`가 나기 때문이다.
+</details>
+
+<details>
+<summary>3. 새 질문이 들어올 때 <code>retry_num</code>, <code>generate_num</code>을 0으로 되돌리는 이유는?</summary>
+
+체크포인터로 같은 스레드에서 질문을 이어 가면 앞 질문의 횟수가 남아 있어서, 다음 질문이 바로 한도에 걸리기 때문이다.
+</details>
+
+<details>
+<summary>4. 검색 결과 정리를 LLM 대신 코드로 바꾼 이유는?</summary>
+
+LLM이 정리하면서 원문 내용을 바꿔 잘못된 쪽 번호·내용으로 답한 일이 있었다. 공백 정리처럼 단순한 일은 코드가 안전하다.
+</details>
+
+<details>
+<summary>5. 한 번에 통과하는 질문에도 LLM을 몇 번 부르나?</summary>
+
+4번 (chatbot, 검색 결과 평가, 답변 생성, 환각 평가). 품질을 얻는 대신 시간과 비용이 든다.
+</details>

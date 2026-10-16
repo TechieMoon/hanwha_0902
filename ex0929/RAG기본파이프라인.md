@@ -1,5 +1,12 @@
 # PDF 문서 기반 RAG 기본 파이프라인
 
+> **한눈에 보기**
+> - RAG 8단계: **로드 → 분할 → 임베딩 → 벡터 DB → 검색기 → 프롬프트 → LLM → 체인**
+> - 프롬프트에 `#Context`(검색 결과)와 `#Question`을 넣어 "문서를 근거로 답하라"고 지시
+> - 체인: `{"context": retriever, "question": RunnablePassthrough()} | prompt | llm | StrOutputParser()`
+
+코드: [rag-basic-pdf.ipynb](rag-basic-pdf.ipynb)
+
 RAG(Retrieval-Augmented Generation)의 기본 흐름을 **문서 로드 → 분할 → 임베딩 → 벡터 DB 저장 → 검색기 생성 → 프롬프트 → LLM → 체인** 8단계로 나눠서 하나씩 실행해보고, 마지막에 전체 과정을 한 셀로 합쳐본다. 대상 문서는 소프트웨어정책연구소(SPRi)의 `SPRI_AI_Brief_2023년12월호_F.pdf`다.
 
 ## 1. 환경변수 로드
@@ -355,3 +362,23 @@ print(response)
 | 6. 프롬프트 | `PromptTemplate` | 검색 결과와 질문을 LLM 입력으로 조립 |
 | 7. LLM | `ChatOpenAI` | 답변 생성 |
 | 8. 체인 | LCEL (`\|`) + `RunnablePassthrough` | 전체 과정을 하나의 실행 흐름으로 연결 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. RAG를 한 문장으로 설명하면?</summary>
+
+질문과 관련된 문서 조각을 먼저 검색해서 프롬프트에 함께 넣고, LLM이 그 내용을 근거로 답하게 하는 방법이다.
+</details>
+
+<details>
+<summary>2. 8단계 중 문서를 미리 한 번만 해 두는 단계와 질문마다 실행되는 단계는?</summary>
+
+로드·분할·임베딩·DB 저장은 미리 한 번(색인), 검색·프롬프트 조립·LLM 호출은 질문마다 실행된다.
+</details>
+
+<details>
+<summary>3. <code>RunnablePassthrough()</code>가 이 체인에서 하는 일은?</summary>
+
+체인에 넣은 질문 문자열을 바꾸지 않고 그대로 `question` 자리에 넘긴다.
+</details>

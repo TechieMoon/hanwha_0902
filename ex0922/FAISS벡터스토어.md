@@ -1,5 +1,14 @@
 # FAISS 벡터 스토어 실습
 
+> **한눈에 보기**
+> - FAISS: 메타가 만든 빠른 벡터 검색 라이브러리, Chroma와 사용법이 거의 같다
+> - `from_documents()` / `from_texts()`로 생성, `add_*` / `delete(ids)`로 수정
+> - 디스크 저장은 `save_local()` / `load_local()`로 **직접** 해야 한다
+> - `load_local(..., allow_dangerous_deserialization=True)`: 내부에 pickle을 쓰므로 **내가 만든 인덱스만** 불러온다
+> - `merge_from()`으로 두 인덱스 합치기, `as_retriever()`로 검색기 만들기
+
+코드: [FAISS.ipynb](FAISS.ipynb)
+
 FAISS(Facebook AI Similarity Search)는 메타(구 페이스북)에서 만든 고속 벡터 유사도 검색 라이브러리다. Chroma와 마찬가지로 로컬에서 바로 쓸 수 있는 벡터 스토어이며, 문서 추가/삭제, 로컬 저장/불러오기, 두 인덱스 합치기(merge), 다양한 검색 전략(MMR, 점수 임계값 등)까지 실습한다.
 
 ```python
@@ -600,3 +609,29 @@ retriever.invoke("ESG에 대하여 알려줘.")
 | 검색 | `similarity_search()`, `as_retriever()`(`mmr`, `similarity_score_threshold` 등) |
 
 Chroma와 인터페이스(`similarity_search`, `as_retriever`, `add_texts` 등)는 대부분 동일해서 코드를 거의 그대로 옮겨 쓸 수 있다. 다만 FAISS는 저장을 `save_local()`/`load_local()`로 명시적으로 해줘야 하고, 서로 다른 인덱스를 `merge_from()`으로 합칠 수 있다는 점, 그리고 인덱스 구조(`index`, `docstore`, `index_to_docstore_id`)를 직접 다룰 수도 있다는 점이 Chroma와 다르다.
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. FAISS와 Chroma의 가장 큰 사용상 차이는?</summary>
+
+Chroma는 `persist_directory`로 자동 저장되지만, FAISS는 `save_local()`/`load_local()`을 직접 호출해야 한다.
+</details>
+
+<details>
+<summary>2. <code>allow_dangerous_deserialization=True</code>가 필요한 이유와 주의할 점은?</summary>
+
+FAISS 인덱스 파일을 불러올 때 pickle을 쓰기 때문이다. pickle은 열 때 코드가 실행될 수 있으므로 출처를 모르는 인덱스 파일에는 쓰면 안 된다.
+</details>
+
+<details>
+<summary>3. <code>search_type="similarity_score_threshold"</code>는 <code>k</code>와 무엇이 다른가?</summary>
+
+개수가 아니라 점수 기준이다. `score_threshold` 이상인 문서만 돌려주므로 결과가 0개일 수도 있다.
+</details>
+
+<details>
+<summary>4. 빈 FAISS 인덱스를 직접 만들 때 차원 수가 필요한 이유는?</summary>
+
+`faiss.IndexFlatL2(dim)`처럼 벡터 길이를 정해야 해서다. 임베딩 모델의 차원(예: 1536)과 같아야 한다.
+</details>

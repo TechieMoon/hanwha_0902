@@ -1,5 +1,11 @@
 # 다양한 방법으로 LLM 연동하기
 
+> **한눈에 보기**
+> - 같은 일을 여러 LLM·여러 방식으로 호출해 비교: **Ollama**(로컬) / **Gemini** / **OpenAI**
+> - OpenAI 호환 엔드포인트(`base_url`)를 쓰면 다른 모델도 같은 코드 모양으로 호출할 수 있다
+> - `chat.completions` vs `responses`: responses는 `output_text`, `instructions`, 서버 측 대화 기억(`previous_response_id`)
+> - 이미지 분석·생성, 임베딩과 코사인 유사도, 프롬프트 기법(시스템 / Few-shot / CoT)
+
 10월 12일부터 강사님이 직접 만든 자료로 수업이 진행됐다. 첫 시간에는 같은 일을 여러 LLM과 여러 방식으로 호출해 보면서 차이를 비교했다. 로컬 모델(Ollama), Gemini, OpenAI를 써 봤고, OpenAI로는 대화 기억, temperature, 이미지 분석·생성, 스트리밍, 임베딩, 프롬프트 기법까지 실습했다.
 
 - 코드: [`exam1.ipynb`](exam1.ipynb) (강의 슬라이드 이미지는 빼고, 실행 결과를 보고 정리한 **📝 정리** 셀을 추가한 사본)
@@ -146,3 +152,29 @@ CoT 예제는 모델 출력 문자열을 `json.loads()`로 바로 파싱한다. 
 | 이미지 | `input_image`(분석), `images.generate`(생성) | 분석은 `gpt-4o-mini`, 생성은 `gpt-image-2` |
 | 임베딩 | `embeddings.create` + 코사인 유사도 | 단어 하나보다 문장 단위에서 더 정확 |
 | 프롬프트 | 시스템 / Few-shot / CoT | 역할·예시·단계를 주면 답의 형식과 품질이 안정된다 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. OpenAI 호환 엔드포인트를 쓰면 좋은 점은?</summary>
+
+`OpenAI(base_url=..., api_key=...)`만 바꿔서 Ollama·Gemini 같은 다른 모델을 같은 코드로 호출할 수 있다.
+</details>
+
+<details>
+<summary>2. <code>responses</code> API에서 이전 대화를 이어 가는 방법은?</summary>
+
+`previous_response_id`에 앞 응답의 id를 넣거나 `conversation`을 써서, 대화 기록을 서버가 보관하게 한다.
+</details>
+
+<details>
+<summary>3. Ollama 같은 로컬 모델의 장단점은?</summary>
+
+무료이고 데이터가 밖으로 나가지 않지만, 내 컴퓨터 사양에 따라 느리고 큰 모델은 돌리기 어렵다.
+</details>
+
+<details>
+<summary>4. Few-shot과 CoT 프롬프트는 각각 무엇인가?</summary>
+
+Few-shot은 원하는 답의 예시를 몇 개 보여 주는 것, CoT는 단계별로 생각하며 풀게 하는 것이다 (→ [ex0916 퓨샷](../ex0916/퓨샷프롬프트.md)).
+</details>

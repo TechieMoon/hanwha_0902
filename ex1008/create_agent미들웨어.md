@@ -1,5 +1,11 @@
 # create_agent 미들웨어와 구조화 출력
 
+> **한눈에 보기**
+> - **미들웨어**: `create_agent`가 모델을 부르는 과정에 끼어들어 모델·프롬프트를 바꾸거나 입력을 검사한다
+> - `@wrap_model_call`(호출 감싸기, 노드 없음) / `@before_model`(호출 전 검사, 노드 추가) / `@dynamic_prompt`(호출마다 시스템 프롬프트)
+> - 런타임 컨텍스트: `context_schema` + `invoke(..., context=...)`로 상태에 남지 않는 실행 설정 전달
+> - 구조화 출력: `response_format=ToolStrategy(스키마)` → 결과는 `structured_response`
+
 6.3에서는 `create_agent(llm, tools)`로 에이전트를 바로 만들었다. 이번에는 **미들웨어**로 에이전트가 모델을 호출하는 과정에 끼어들어 모델·프롬프트를 바꾸거나 입력을 검사하고(6.4.3), 최종 결과를 정해진 형식의 객체로 받는 **구조화 출력**(6.4.4)을 실습했다.
 
 | 파일 | 내용 |
@@ -548,3 +554,35 @@ uv run create_agent/structured_output.py
 | 런타임 컨텍스트 | `context_schema` + `invoke(..., context=...)` | 상태에 저장되지 않는, 그 실행에만 쓰는 설정값 |
 | 대화 기억 | `checkpointer=MemorySaver()` + `thread_id` | 같은 `thread_id`면 이전 대화에 이어서 쌓인다 |
 | 구조화 출력 | `response_format=ToolStrategy(스키마)` | 스키마를 도구로 만들어 호출하게 하고, 결과는 `structured_response`에 객체로 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. <code>@wrap_model_call</code>과 <code>@before_model</code>의 차이는?</summary>
+
+`wrap_model_call`은 모델 호출 자체를 감싸 요청(모델 등)을 바꾸며 그래프에 노드가 생기지 않고, `before_model`은 호출 전에 실행되는 노드가 그래프에 추가된다.
+</details>
+
+<details>
+<summary>2. <code>@before_model</code>에서 마지막 메시지를 검사할 때 주의할 점은?</summary>
+
+도구를 쓴 뒤 두 번째 모델 호출 때는 마지막 메시지가 사용자 입력이 아니라 도구 결과(ToolMessage)다.
+</details>
+
+<details>
+<summary>3. 런타임 컨텍스트와 상태(state)의 차이는?</summary>
+
+상태는 그래프를 따라 저장·누적되고, 런타임 컨텍스트는 그 실행에만 쓰는 설정값(사용자 역할 등)으로 상태에 저장되지 않는다.
+</details>
+
+<details>
+<summary>4. <code>ToolStrategy(ContactInfo)</code>는 어떻게 구조화 출력을 만드나?</summary>
+
+스키마를 `ContactInfo`라는 도구로 만들어 LLM이 호출하게 하고, 그 호출 인자로 객체를 만들어 `structured_response`에 넣는다.
+</details>
+
+<details>
+<summary>5. 대화가 이어지려면 무엇이 필요했나?</summary>
+
+`checkpointer=MemorySaver()`로 에이전트를 만들고, 같은 `thread_id`를 config에 넣어 호출한다.
+</details>

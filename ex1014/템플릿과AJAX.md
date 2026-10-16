@@ -1,5 +1,11 @@
 # FastAPI로 HTML 응답하기: Jinja2 템플릿과 AJAX
 
+> **한눈에 보기**
+> - HTML 응답 3가지: `HTMLResponse`(문자열) / **Jinja2 템플릿**(`{{ }}`로 값 채우기) / AJAX(페이지 이동 없이 갱신)
+> - `templates.TemplateResponse(request, "파일.html", {...})` — 새 버전은 `request`를 첫 인자로
+> - `url_for`로 주소를 직접 적지 않고 만든다
+> - 폼 제출은 페이지가 이동, AJAX(`XMLHttpRequest`)는 결과만 바꾼다, `setInterval`로 주기적 갱신
+
 JSON만 돌려주는 API가 아니라 브라우저에 **HTML 페이지**를 보여 주는 방법을 실습했다. HTML 문자열을 직접 돌려주는 `HTMLResponse`, HTML 파일에 값을 채워 넣는 **Jinja2 템플릿**, 페이지 이동 없이 자바스크립트로 서버를 호출하는 **AJAX**를 비교했다. 실습하면서 HTML 태그(제목, 이미지, 링크, 목록, 폼)도 같이 익혔다.
 
 - 코드: [`exam7.py`](exam7.py), [`exam7_1.py`](exam7_1.py), [`exam8.py`](exam8.py), [`exam9.py`](exam9.py), [`exam9_1.py`](exam9_1.py), [`exam15_2.py`](exam15_2.py), 템플릿은 [`templates/`](templates/)
@@ -99,3 +105,23 @@ window.setInterval(commAjax, 2000);
 | 폼 제출 | `<form action="/calc" method="get">` | 페이지가 이동함 |
 | AJAX | `XMLHttpRequest` + `JSON.parse` | 페이지 이동 없이 결과만 갱신 |
 | 주기적 갱신 | `setInterval(함수, 2000)` | 일정 간격으로 서버 호출 |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 템플릿을 쓰면 <code>HTMLResponse</code>보다 좋은 점은?</summary>
+
+HTML을 파일로 분리해 파이썬 코드와 섞이지 않고, `{{ 변수 }}`, `{% for %}`로 값만 채울 수 있다.
+</details>
+
+<details>
+<summary>2. 폼 제출과 AJAX의 차이는?</summary>
+
+폼 제출은 결과 페이지로 이동하고, AJAX는 자바스크립트가 서버에 요청해 받은 데이터로 현재 페이지 일부만 바꾼다.
+</details>
+
+<details>
+<summary>3. <code>url_for('static', path=...)</code>를 쓰는 이유는?</summary>
+
+정적 파일 주소를 코드에 직접 적지 않아서, mount 경로가 바뀌어도 템플릿을 고칠 필요가 없다.
+</details>

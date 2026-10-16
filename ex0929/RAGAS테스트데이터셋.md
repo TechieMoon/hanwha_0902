@@ -1,5 +1,12 @@
 # RAGAS로 합성 테스트 데이터셋 생성하기
 
+> **한눈에 보기**
+> - RAG를 평가하려면 **질문–정답–근거 문서** 데이터셋이 필요 → RAGAS로 문서에서 자동 생성
+> - `TestsetGenerator` + 질문 유형 분포(single-hop / multi-hop) + 한국어 프롬프트로 10개 생성 → CSV
+> - 합성 데이터에는 중복(5·7번)이나 어색한 질문이 섞이므로 사람이 확인해야 한다
+
+코드: [ragas_test_dataset.ipynb](ragas_test_dataset.ipynb) · 결과: [data/ragas_synthetic_dataset.csv](data/ragas_synthetic_dataset.csv)
+
 RAG 시스템을 평가하려면 "질문 – 정답 – 정답의 근거 문서"로 된 테스트 데이터셋이 필요하다. 사람이 직접 만들기엔 시간이 많이 들기 때문에, **RAGAS**의 `TestsetGenerator`로 PDF 문서에서 질문과 정답을 LLM이 자동으로 만들게 한다(합성 데이터셋, synthetic dataset). 만든 데이터셋은 CSV로 저장해서 이후 RAG 평가에 사용한다.
 
 - 사용 버전: LangChain 1.4, RAGAS 0.4
@@ -304,3 +311,23 @@ test_df.to_csv("data/ragas_synthetic_dataset.csv", index=False)
 | 한국어 질문 | `synthesizer.adapt_prompts("korean", adapt_instruction=True)` + `set_prompts()` |
 | 생성 | `generate_with_langchain_docs(documents, testset_size, query_distribution)` |
 | 저장 | `testset.to_pandas().to_csv(...)` |
+
+## 🔁 복습 질문
+
+<details>
+<summary>1. 테스트 데이터셋을 사람이 아니라 RAGAS로 만드는 이유는?</summary>
+
+질문·정답·근거를 사람이 일일이 만들기엔 시간이 많이 든다. 문서에서 자동으로 만들고 사람은 검토만 한다.
+</details>
+
+<details>
+<summary>2. multi-hop 질문이 RAG 평가에 중요한 이유는?</summary>
+
+여러 조각을 함께 찾아야 답할 수 있어서, 검색기가 관련 조각을 빠짐없이 가져오는지 시험할 수 있다.
+</details>
+
+<details>
+<summary>3. 질문 유형 비율을 0.15처럼 주면 생성 개수가 늘어나는 이유는?</summary>
+
+유형별 개수를 `ceil(testset_size * 비율)`로 올림해서 계산하기 때문이다 (10 × 0.15 = 1.5 → 2).
+</details>
