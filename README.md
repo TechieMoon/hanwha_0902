@@ -1,180 +1,183 @@
-# hanwha_0902
+# 한화내일아카데미 AI 에이전트 과정 학습 기록
 
-이름: 한화내일아카데미 ICT부문
+> **한화내일아카데미 ICT부문** · 2026.09.01 ~ 2026.11.13 (400시간)
+> LLM 오케스트레이션부터 RAG, 멀티 에이전트 배포까지 배운 내용을 날짜별로 기록한 저장소입니다.
+> 실습 코드에는 주석을 달고, 직접 실행한 결과를 보고 확인한 점을 문서로 정리했습니다.
 
-내용: LM 오케스트레이션부터 RAG, 멀티 에이전트 배포까지 — 실제 실무와 가장 가까운 커리큘럼으로 배우는 400시간
+**사용 기술** · Python · LangChain · LangGraph · OpenAI API · FastAPI · Streamlit · Chroma · FAISS · pgvector(PostgreSQL) · Docker · Selenium
 
-기간: 26.9.1 ~ 26.11.13 
+책 『만들면서 배우는 AI 에이전트 개발 입문+실전』 실습은 책 목차 순서로 [agent 저장소](https://github.com/TechieMoon/agent)에도 정리했습니다.
 
-# 2026-09-01
+## 주제별로 보기
 
-1. 한화빌딩 기업 탐방(오리엔테이션)
+| 주제 | 배운 내용 | 대표 정리 문서 |
+|---|---|---|
+| 개발 환경 | VS Code, 가상환경, GitHub, API 키 관리, 도커 | [가상환경](ex0902/가상환경가이드.md) · [깃 충돌 해결](ex0907/깃충돌해결법.md) · [실습 환경 구축](ex1012/실습환경구축.md) |
+| 파이썬과 데이터 | 기본 문법, Pydantic, 예외 처리, NumPy, Pandas | [Pydantic](ex0907/Pydantic.md) · [판다스 기초](ex0916/판다스기초.md) |
+| LLM 호출과 프롬프트 | LangChain, 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력, 캐싱, 대화 메모리, Gemini·Ollama 연동 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) |
+| 문서 처리와 벡터 DB | 문서 로더, 텍스트 분할, 임베딩, Chroma, FAISS, pgvector | [재귀 텍스트 분할](ex0921/재귀문자텍스트분할.md) · [OpenAI 임베딩](ex0922/OpenAI임베딩.md) · [Chroma](ex0922/크로마벡터스토어.md) · [임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md) |
+| 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) |
+| 도구 호출과 에이전트 | LangGraph(상태·노드·엣지), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어, Function·빌트인·MCP 도구 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) |
+| 웹 서비스 | FastAPI(라우팅, 검증, 템플릿, 파일 업로드), Streamlit, 에이전트·RAG를 REST API로 서비스 | [FastAPI와 Streamlit](ex0910/streamlit_fastapi.md) · [요청 본문과 검증](ex1014/요청본문과검증.md) · [AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md) |
+| 웹 데이터 수집 | requests·BeautifulSoup, 공공·네이버 Open API, Selenium | [정적 수집](ex1013/정적웹수집.md) · [오픈 API 수집](ex1013/오픈API수집.md) · [동적 수집](ex1013/동적웹수집.md) |
 
-# 2026-09-02
+## 직접 확인하고 고친 문제
 
-1. [VSCode 설치](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0902/VSCode설치가이드.md)
-2. [Python 설치](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0902/Python설치가이드.md)
-3. [가상환경 세팅](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0902/가상환경가이드.md)
-4. [파이썬 기초](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0902/0902.ipynb)
+실습 코드를 그대로 따라 하는 데서 끝내지 않고, 실행해 보며 찾은 문제를 재현하고 고쳤습니다.
 
-# 2026-09-03
+- **RAG 에이전트(LangGraph)** — 답변 재생성에 횟수 제한이 없어 `GraphRecursionError`, 재검색 시 출력 오류, 같은 대화에서 재시도 횟수가 다음 질문으로 이어지는 문제를 고쳤습니다. 실제 실행에서 LLM 정리 단계가 원문을 고쳐 써 출처 쪽 번호가 틀리는 것을 확인하고, 정리를 코드로 바꾸고 검색 개수·평가 기준을 조정해 답변이 나아진 것을 다시 실행해 확인했습니다. ([문서](ex1008/RAG에이전트그래프.md))
+- **파일 업로드 경로 조작** — 파일 이름에 `../`를 넣으면 저장 폴더 밖에 파일이 써지는 것을 재현하고 `os.path.basename()`으로 막았습니다. ([문서](ex1014/폼과파일업로드.md))
+- **LLM 도구로 서버 멈추기** — 계산기 도구에 `9**9**8` 같은 식을 주면 서버가 멈추는 것을 재현하고, 거듭제곱 결과 크기를 미리 제한했습니다. ([문서](ex1015/FastAPI_AI에이전트서버.md))
+- **API 키 노출** — 실습 노트북의 코드와 출력에 남아 있던 API 키 4종을 환경변수로 바꾸고 출력도 가렸습니다. ([문서](ex1013/오픈API수집.md))
+- **RAG 검색 임계값** — 실제 유사도는 정답도 0.3 ~ 0.5대라서 강의 자료의 기준(0.9 이상 '매우 유사')을 그대로 쓰면 검색 결과가 0개가 되는 것, 같은 문서가 중복 저장되는 문제를 실험으로 확인했습니다. ([문서](ex1015/RAG.md))
+- **라이브러리 버전 차이** — 수업 환경(starlette 1.7)에서 오류가 나던 옛 템플릿 호출 방식을 찾아 고쳤습니다. ([문서](ex1014/템플릿과AJAX.md))
 
-1. [파이썬 함수, 클래스](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0903/0903.ipynb)
-2. streamlit([가이드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0903/streamlit가이드.md), [테스트](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0903/test.py))
+## 날짜별 기록
 
-# 2026-09-04
+10월 12일부터는 책 대신 강사님이 직접 만든 자료로 수업이 진행됐습니다.
 
-1. github 사용법
-2. [github desktop 사용법](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0904/깃허브데스크탑가이드.md)
-3. [파이썬 스트링, 클래스, 딕셔너리, numpy](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0904/0904.ipynb)
+<details open>
+<summary><b>2026년 10월</b></summary>
 
-# 2026-09-07
+### 2026-10-15
+- **[임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md)** — 임베딩·코사인 유사도, 도커 pgvector에 저장하고 SQL로 유사도 검색, 실제 유사도 값과 임계값 실험 · [코드](ex1015/exam3.ipynb)
+- **[RAG](ex1015/RAG.md)** — 검색·증강·생성 3단계, 청크 적재, 벡터 DB REST API와 항공 가이드 RAG 챗봇, 중복 저장·임계값 문제 확인 · [코드](ex1015/fastapiedu/exam21.py)
+- **[도구를 쓰는 AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md)** — FastAPI + Streamlit, 세션별 대화 유지, 계산기 도구 DoS 수정 · [코드](ex1015/fastapiedu/exam19.py)
 
-1. Pydantic 실습([정리 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/Pydantic.md), [코드 1](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/pydantic.ipynb), [코드 2](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic01.py), [코드 3](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic02.py), [코드 4](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/day4_pydantic03.py))
-2. [Python try...except 실습](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/try_except.ipynb)
-3. [깃허브 충돌 시 해결방법](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0907/깃충돌해결법.md)
+### 2026-10-14
+- **[FastAPI 라우팅과 파라미터](ex1014/라우팅과파라미터.md)** — 경로·쿼리 파라미터, 타입 검증과 422 응답, REST API 개념 · [코드](ex1014/exam3.py)
+- **[템플릿과 AJAX](ex1014/템플릿과AJAX.md)** — Jinja2, `url_for`, 폼 제출과 AJAX 비교, 버전에 따른 호출 방식 오류 수정 · [코드](ex1014/exam9_1.py)
+- **[요청 본문과 검증](ex1014/요청본문과검증.md)** — Pydantic 본문, `Query`·`Path` 검증, `HTTPException`, `response_model` · [코드](ex1014/exam14.py)
+- **[폼과 파일 업로드](ex1014/폼과파일업로드.md)** — `Form`, lifespan, 파일 업로드·저장, 경로 조작 문제 수정, CORS · [코드](ex1014/exam18.py)
 
-# 2026-09-08
+### 2026-10-13
+- **[빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md)** — Tool Schema 작성 원칙, `web_search`, 외부 MCP 서버 연결 · [코드](ex1013/exam2.ipynb)
+- **[정적 웹 수집](ex1013/정적웹수집.md)** — urllib·requests·BeautifulSoup, YES24 도서 240권 수집, AI가 짠 수집 코드 비교 · [코드](ex1013/dataexam/exam1.ipynb)
+- **[오픈 API 수집](ex1013/오픈API수집.md)** — 서울시·네이버 API(XML·JSON), API 키 정리 · [코드](ex1013/dataexam/exam2.ipynb)
+- **[동적 웹 수집](ex1013/동적웹수집.md)** — Selenium, 명시적 대기, 정적·동적 수집 비교 · [코드](ex1013/dataexam/exam3.ipynb)
 
-1. FastAPI 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/fastapi_guide.md), [get](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/main.py), [put](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/get_put.py), [path parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/path_parameters.py), [query parameters](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0908/query_parameters.py))
+### 2026-10-12
+- **[실습 환경 구축](ex1012/실습환경구축.md)** — API 키 환경변수, Ollama, 가상환경과 노트북 커널
+- **[다양한 방법으로 LLM 연동하기](ex1012/LLM연동하기.md)** — Ollama·Gemini·OpenAI 호출 비교, 서버 측 대화 기억, 이미지 분석·생성, 임베딩 · [코드](ex1012/exam1.ipynb)
+- **[LLM에 도구 연결하기](ex1012/도구호출.md)** — 함수 + JSON Schema 도구, 에이전트 루프, 실시간 날씨 도구 · [코드](ex1012/exam2.ipynb)
 
-# 2026-09-09
+### 2026-10-08
+- **[create_agent 미들웨어](ex1008/create_agent미들웨어.md)** — 모델 교체, 금지어 차단, 동적 프롬프트, 구조화 출력 · [코드](ex1008/create_agent/middleware.py)
+- **[벡터 DB 저장과 검색](ex1008/벡터DB저장과검색.md)** — 264쪽 PDF를 청크 510개로 나눠 Chroma에 저장하고 검색 · [코드](ex1008/rag_agent/vector_retriever.ipynb)
+- **[검색 도구 만들기](ex1008/검색도구만들기.md)** — `create_retriever_tool`, 검색 결과와 DB 경로 문제 확인 · [코드](ex1008/rag_agent/retriever.py)
+- **[랭그래프로 RAG 에이전트 만들기](ex1008/RAG에이전트그래프.md)** — 관련성·환각 평가로 재검색·재생성, 찾은 문제 수정과 재실행 비교 · [코드](ex1008/rag_agent/agent.py)
 
-1. FastAPI GET, POST, DELETET, PUT([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/FastAPI%EC%97%B0%EC%8A%B5.md), [연습 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909/main.py), [최종 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0909_2/main.py))
+### 2026-10-07
+- **[코딩 에이전트](ex1007/코딩에이전트.md)** — 도구 설명서 비교, 코드 실행·파일 저장 도구, `create_agent` · [코드](ex1007/coding_agent/agent.py) · [도구](ex1007/coding_agent/tools.py) · [사용자 정의 도구](ex1007/coding_agent/custom_tools.ipynb)
 
-# 2026-09-10
+### 2026-10-06
+- **[웹 검색 에이전트](ex1006/웹검색에이전트.md)** — 도구 노드와 라우팅, 실행 방법 비교, `langgraph dev`와 LangSmith Studio · [코드](ex1006/web_agent.py)
 
-1. [Python 딕셔너리](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/dictionary.ipynb)
-2. [Python if..else문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/if_else.ipynb)
-3. [Python match..case문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/match_case.ipynb)
-4. [Python while문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/while.ipynb)
-5. [Python for문](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/for.ipynb)
-6. FastAPI와 Streamlit 연결([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/streamlit_fastapi.md), [FastAPI 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_fastapi/main.py), [Streamlit 코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0910/proj_streamlit/app.py))
+### 2026-10-02
+- **[랭그래프 에이전트 구현](ex1002/랭그래프에이전트구현.md)** — 입력·출력 상태 분리, 가드레일 노드와 조건부 엣지 · [코드](ex1002/design_agent.ipynb)
+- **[타빌리 검색과 도구 호출](ex1002/타빌리검색도구호출.md)** — `TavilySearch`, `bind_tools`, 도구 설명서만큼 늘어나는 토큰 · [코드](ex1002/tavily_search.ipynb)
 
-# 2026-09-11
+### 2026-10-01
+- **[ChatOpenAI 번역](ex1001/ChatOpenAI번역.md)** — 첫 LLM 호출로 개발 환경 확인 · [코드](ex1001/translation.py)
+- **[랭그래프 기본 개념](ex1001/랭그래프기본개념.md)** — 상태(TypedDict·Pydantic), 리듀서, 노드·엣지·조건부 엣지 · [코드](ex1001/try_langgraph.ipynb)
 
-1. OpenAI API key 사용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/OpenAI%EA%B0%80%EC%9D%B4%EB%93%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/apikey_test.py))
-2. Langchain 프레임워크 연습([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0911/page92.ipynb))
+</details>
 
-# 2026-09-14
+<details>
+<summary><b>2026년 9월</b></summary>
 
-1. .env로 OpenAI API 키 관리([코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch03.ipynb))
-2. Langchain으로 ChatOpenAI 호출, 응답 메타데이터/토큰 사용량 확인, logprobs, 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04.ipynb))
-3. LangSmith 연동 및 Langchain 에이전트(Tool 호출) 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/랭체인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0914/ch04_langsmith.ipynb))
+### 2026-09-30
+- **[RAG 실습 2: 생성형 AI 윤리 가이드북 QA](ex0930/RAG실습.md)** — 9/28 파이프라인을 30쪽 가이드북에 적용, 검색 후보·리랭커 개수 조정, 3문제 정답 확인 · [코드](ex0930/RAG.ipynb)
 
-# 2026-09-15
+### 2026-09-29
+- **[RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md)** — 로드 → 분할 → 임베딩 → FAISS → 리트리버 → 프롬프트 → LLM → 체인 · [코드](ex0929/rag-basic-pdf.ipynb)
+- **[문서 요약](ex0929/문서요약.md)** — Stuff, Map-Reduce, Map-Refine, Chain of Density 비교 · [코드](ex0929/summary.ipynb)
+- **[RAGAS 테스트 데이터셋](ex0929/RAGAS테스트데이터셋.md)** — PDF로 평가용 질문·정답·근거 자동 생성 · [코드](ex0929/ragas_test_dataset.ipynb)
+- **[RunnablePassthrough](ex0929/RunnablePassthrough.md)** — 입력 전달과 `.assign()`, RAG 체인 구성 · [코드](ex0929/runnable_passthrough.ipynb)
 
-1. PromptTemplate/ChatPromptTemplate 실습, partial_variables로 값 고정 및 동적 생성, yaml 파일로 프롬프트 관리([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/ch05.ipynb))
-2. 멀티모달(이미지 입력) LLM 호출 및 스트리밍 응답 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/프롬프트템플릿.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0915/multimodal.ipynb))
+### 2026-09-28
+- **[RAG 실습: 리랭커 기반 사내 문서 QA](ex0928/RAG실습.md)** — FAISS + Cross Encoder 리랭커, 임계값 대신 시스템 프롬프트로 "문서에 없는 답" 판별 · [코드 1(직접 작성)](ex0928/rag_01_0928.ipynb) · [코드 2(보강)](ex0928/rag_02_0928.ipynb)
 
-# 2026-09-16
+### 2026-09-23
+- **[VectorStore 리트리버](ex0923/벡터스토어리트리버.md)** — 기본·MMR·점수 임계값 검색, `ConfigurableField` · [코드](ex0923/vectorstore_retriever.ipynb)
+- **[문맥 압축 리트리버](ex0923/문맥압축리트리버.md)** — 추출·필터·임베딩 필터, 압축 파이프라인 · [코드](ex0923/contextual_compression_retriever.ipynb)
+- **[앙상블 리트리버](ex0923/앙상블리트리버.md)** — BM25(키워드) + FAISS(의미) 가중치 조합 · [코드](ex0923/ensemble_retriever.ipynb)
+- **[Cross Encoder 리랭커](ex0923/크로스인코더리랭커.md)** — 1차 검색 후 재정렬(retrieve-then-rerank) · [코드](ex0923/cross_encoder_reranker.ipynb)
+- **[Cohere 리랭커](ex0923/코히어리랭커.md)** — Cohere rerank API로 재정렬 · [코드](ex0923/cohere-reranker.ipynb)
+- **[웹페이지 로더](ex0923/웹페이지로더.md)** — `WebBaseLoader`, 특정 영역만 파싱, 비동기 로드 · [코드](ex0923/web_base_loader.ipynb)
+- **[부모 문서 리트리버](ex0923/부모문서리트리버.md)** — 작은 조각으로 검색하고 큰 부모 단위로 반환 · [코드](ex0923/parent_document_retriever.ipynb)
 
-1. Few-Shot Prompting(예시 기반 프롬프트) 실습, Self-Ask 스타일 예시로 단계적 추론 유도, FewShotPromptTemplate과 체인(prompt | llm | StrOutputParser) 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%ED%93%A8%EC%83%B7%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/fewshot.ipynb))
-2. Output Parser 실습, PydanticOutputParser로 이메일 본문을 구조화된 객체로 파싱, with_structured_output()과 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EC%95%84%EC%9B%83%ED%92%8B%ED%8C%8C%EC%84%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/output_parser.ipynb))
-3. Pandas 기초(Series/DataFrame), Titanic CSV 데이터 로드, 컬럼 선택 및 조건 필터링, loc/iloc 인덱싱 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%ED%8C%90%EB%8B%A4%EC%8A%A4%EA%B8%B0%EC%B4%88.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/csv.ipynb))
-4. CommaSeparatedListOutputParser로 쉼표 구분 답변을 파이썬 리스트로 파싱, invoke/stream 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EC%89%BC%ED%91%9C%EA%B5%AC%EB%B6%84%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%8C%8C%EC%84%9C.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/commaseparatedlist.ipynb))
-5. with_structured_output()으로 질문에 답변과 출처를 구조화된 객체로 받기 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/%EA%B5%AC%EC%A1%B0%ED%99%94%EB%90%9C%EC%B6%9C%EB%A0%A5.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0916/structured_output_parser.ipynb))
+### 2026-09-22
+- **[OpenAI 임베딩](ex0922/OpenAI임베딩.md)** — 문장 벡터화, 차원 축소, 코사인 유사도 · [코드](ex0922/openai_embeddings.ipynb)
+- **[HuggingFace 임베딩](ex0922/허깅페이스임베딩.md)** — 원격·로컬 비교, bge-m3의 dense·sparse·ColBERT · [코드](ex0922/huggingface_embeddings.ipynb)
+- **[Chroma 벡터 스토어](ex0922/크로마벡터스토어.md)** — 저장·검색·필터·CRUD·MMR, 이미지-텍스트 멀티모달 검색 · [코드](ex0922/chroma.ipynb)
+- **[FAISS 벡터 스토어](ex0922/FAISS벡터스토어.md)** — 인덱스 구성, 저장·불러오기, 병합, 검색 전략 비교 · [코드](ex0922/FAISS.ipynb)
 
-# 2026-09-17
+### 2026-09-21
+- **[문자 텍스트 분할](ex0921/문자텍스트분할.md)** — `CharacterTextSplitter`, 문서별 metadata · [코드](ex0921/character_text_splitter.ipynb)
+- **[재귀 문자 텍스트 분할](ex0921/재귀문자텍스트분할.md)** — 여러 구분자를 차례로 시도, `chunk_overlap` · [코드](ex0921/recursive_character_text_splitter.ipynb)
+- **[토큰·문장 텍스트 분할](ex0921/토큰문장텍스트분할.md)** — tiktoken·`TokenTextSplitter`, spaCy 문장 분할 · [코드](ex0921/token_text_splitter.ipynb)
+- **[HTML 헤더 텍스트 분할](ex0921/HTML헤더텍스트분할.md)** — 제목 태그 기준 분할, 실제 웹페이지에서 한계 확인 · [코드](ex0921/HTML_Header_text_splitter.ipynb)
 
-1. LLM 응답 캐싱 실습, InMemoryCache/SQLiteCache로 동일 질문 재호출 시 응답 속도 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EC%BA%90%EC%8B%B1.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/cache.ipynb))
-2. 체인 직렬화(dumpd/dumps) 및 pickle/JSON 파일로 저장 후 다시 불러와 실행하기 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EB%AA%A8%EB%8D%B8%EC%A7%81%EB%A0%AC%ED%99%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/model_serialization.ipynb))
-3. Google Gemini(ChatGoogleGenerativeAI) 호출, 프롬프트/체인 재사용, 안전 설정, 이미지 기반 멀티모달 시 생성 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%EA%B5%AC%EA%B8%80%EC%A0%9C%EB%AF%B8%EB%82%98%EC%9D%B4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/google_generative.ipynb))
-4. get_usage_metadata_callback으로 LLM 호출 토큰 사용량 추적 및 합산 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/%ED%86%A0%ED%81%B0%EC%82%AC%EC%9A%A9%EB%9F%89.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0917/token_usage.ipynb))
+### 2026-09-18
+- **[대화 메모리](ex0918/대화메모리.md)** — `RunnableWithMessageHistory`로 세션별 대화 기록 · [코드](ex0918/conversation_memory.ipynb)
+- **[문서 로더](ex0918/문서로더.md)** — PDF 로더 비교, 청크 분할, load/lazy_load/aload 비교 · [코드](ex0918/document_loader.ipynb)
 
-# 2026-09-18
+### 2026-09-17
+- **[LLM 응답 캐싱](ex0917/캐싱.md)** — InMemoryCache·SQLiteCache 속도 비교 · [코드](ex0917/cache.ipynb)
+- **[체인 직렬화](ex0917/모델직렬화.md)** — dumpd·dumps, pickle·JSON 저장과 불러오기 · [코드](ex0917/model_serialization.ipynb)
+- **[Google Gemini](ex0917/구글제미나이.md)** — 호출, 체인 재사용, 안전 설정, 멀티모달 · [코드](ex0917/google_generative.ipynb)
+- **[토큰 사용량](ex0917/토큰사용량.md)** — 콜백으로 토큰 사용량 추적·합산 · [코드](ex0917/token_usage.ipynb)
 
-1. 대화 메모리 실습, InMemoryChatMessageHistory와 RunnableWithMessageHistory로 세션별 대화 기록 유지([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%8C%80%ED%99%94%EB%A9%94%EB%AA%A8%EB%A6%AC.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/conversation_memory.ipynb))
-2. Document Loader 실습, PyPDFLoader/PyMuPDF4LLMLoader로 PDF 불러오기, RecursiveCharacterTextSplitter로 청크 분할, load/lazy_load/aload/alazy_load 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/%EB%AC%B8%EC%84%9C%EB%A1%9C%EB%8D%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0918/document_loader.ipynb))
+### 2026-09-16
+- **[Few-shot 프롬프트](ex0916/퓨샷프롬프트.md)** — Self-Ask 예시로 단계적 추론, `FewShotPromptTemplate` · [코드](ex0916/fewshot.ipynb)
+- **[출력 파서](ex0916/아웃풋파서.md)** — `PydanticOutputParser`와 `with_structured_output()` 비교 · [코드](ex0916/output_parser.ipynb)
+- **[판다스 기초](ex0916/판다스기초.md)** — Series·DataFrame, Titanic 데이터 필터링, loc·iloc · [코드](ex0916/csv.ipynb)
+- **[쉼표 구분 리스트 파서](ex0916/쉼표구분리스트파서.md)** — 답변을 파이썬 리스트로, invoke·stream 비교 · [코드](ex0916/commaseparatedlist.ipynb)
+- **[구조화된 출력](ex0916/구조화된출력.md)** — 답변과 출처를 객체로 받기 · [코드](ex0916/structured_output_parser.ipynb)
 
-# 2026-09-21
+### 2026-09-15
+- **[프롬프트 템플릿](ex0915/프롬프트템플릿.md)** — PromptTemplate·ChatPromptTemplate, `partial_variables`, yaml로 프롬프트 관리 · [코드](ex0915/ch05.ipynb)
+- 멀티모달(이미지 입력) LLM 호출과 스트리밍 · [정리 문서](ex0915/프롬프트템플릿.md) · [코드](ex0915/multimodal.ipynb)
 
-1. CharacterTextSplitter 실습, separator/chunk_size 기준 텍스트 분할, create_documents()로 문서별 metadata 지정, split_text()와 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%EB%AC%B8%EC%9E%90%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/character_text_splitter.ipynb))
-2. RecursiveCharacterTextSplitter 실습, 여러 구분자를 순서대로 시도하는 재귀적 분할, chunk_overlap으로 조각 간 문맥 겹침 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%EC%9E%AC%EA%B7%80%EB%AC%B8%EC%9E%90%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/recursive_character_text_splitter.ipynb))
-3. 토큰/문장 기준 텍스트 분할 실습, CharacterTextSplitter.from_tiktoken_encoder와 TokenTextSplitter로 토큰 수 기준 분할, SpacyTextSplitter로 문장 경계 기준 분할 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/%ED%86%A0%ED%81%B0%EB%AC%B8%EC%9E%A5%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/token_text_splitter.ipynb))
-4. HTMLHeaderTextSplitter 실습, HTML 제목 태그 구조 기준 분할 및 헤더 계층 metadata 부여, 실제 웹페이지(스탠퍼드 철학백과, CNN)에 적용하며 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML%ED%97%A4%EB%8D%94%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%B6%84%ED%95%A0.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0921/HTML_Header_text_splitter.ipynb))
+### 2026-09-14
+- `.env`로 OpenAI API 키 관리 · [코드](ex0914/ch03.ipynb)
+- **[LangChain으로 ChatOpenAI 호출](ex0914/랭체인.md)** — 응답 메타데이터, 토큰 사용량, logprobs, 스트리밍 · [코드](ex0914/ch04.ipynb)
+- LangSmith 연동과 LangChain 에이전트(도구 호출) · [정리 문서](ex0914/랭체인.md) · [코드](ex0914/ch04_langsmith.ipynb)
 
-# 2026-09-22
+### 2026-09-11
+- **[OpenAI API 키 사용](ex0911/OpenAI가이드.md)** · [코드](ex0911/apikey_test.py)
+- LangChain 프레임워크 연습 · [코드](ex0911/page92.ipynb)
 
-1. OpenAI Embeddings 실습, embed_query/embed_documents로 문장 벡터화, dimensions로 차원 축소, 코사인 유사도로 문장 간 의미 유사도 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/OpenAI%EC%9E%84%EB%B2%A0%EB%94%A9.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/openai_embeddings.ipynb))
-2. HuggingFace Embeddings 실습, Endpoint 원격 호출과 로컬 실행 비교, BAAI/bge-m3를 FlagEmbedding으로 직접 사용해 dense/sparse/ColBERT 세 가지 임베딩 방식 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/%ED%97%88%EA%B9%85%ED%8E%98%EC%9D%B4%EC%8A%A4%EC%9E%84%EB%B2%A0%EB%94%A9.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/huggingface_embeddings.ipynb))
-3. Chroma 벡터 스토어 실습, 생성/영구 저장/불러오기/유사도 검색/metadata 필터링/CRUD와 MMR retriever, 후반부에는 OpenCLIP 임베딩과 COCO 이미지 데이터셋으로 이미지-텍스트 멀티모달 검색까지 실습([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/%ED%81%AC%EB%A1%9C%EB%A7%88%EB%B2%A1%ED%84%B0%EC%8A%A4%ED%86%A0%EC%96%B4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/chroma.ipynb))
-4. FAISS 벡터 스토어 실습, faiss.IndexFlatL2로 빈 인덱스 직접 구성, from_documents/from_texts, save_local/load_local, merge_from으로 인덱스 병합, similarity_score_threshold 등 다양한 retriever 검색 전략 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/FAISS%EB%B2%A1%ED%84%B0%EC%8A%A4%ED%86%A0%EC%96%B4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0922/FAISS.ipynb))
+### 2026-09-10
+- 파이썬 제어문 · [딕셔너리](ex0910/dictionary.ipynb) · [if…else](ex0910/if_else.ipynb) · [match…case](ex0910/match_case.ipynb) · [while](ex0910/while.ipynb) · [for](ex0910/for.ipynb)
+- **[FastAPI와 Streamlit 연결](ex0910/streamlit_fastapi.md)** · [FastAPI 코드](ex0910/proj_fastapi/main.py) · [Streamlit 코드](ex0910/proj_streamlit/app.py)
 
-# 2026-09-23
+### 2026-09-09
+- **[FastAPI GET·POST·PUT·DELETE](ex0909/FastAPI연습.md)** · [연습 코드](ex0909/main.py) · [최종 코드](ex0909_2/main.py)
 
-1. VectorStore를 Retriever로 활용하기, 기본/MMR/점수 임계값 검색 비교, ConfigurableField로 실행 시점에 검색 옵션 동적 변경([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EB%B2%A1%ED%84%B0%EC%8A%A4%ED%86%A0%EC%96%B4%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/vectorstore_retriever.ipynb))
-2. 문맥 압축 리트리버(Contextual Compression Retriever) 실습, LLMChainExtractor/LLMChainFilter/EmbeddingsFilter로 검색 결과 압축·필터링, DocumentCompressorPipeline으로 여러 단계 조합([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EB%AC%B8%EB%A7%A5%EC%95%95%EC%B6%95%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/contextual_compression_retriever.ipynb))
-3. 앙상블 리트리버(Ensemble Retriever) 실습, BM25(키워드)와 FAISS(의미) retriever를 weights로 조합, ConfigurableField로 가중치 동적 조절([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EC%95%99%EC%83%81%EB%B8%94%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/ensemble_retriever.ipynb))
-4. Cross Encoder Reranker 실습, FAISS로 1차 검색 후 HuggingFace Cross Encoder(BAAI/bge-reranker-v2-m3)로 재정렬하는 retrieve-then-rerank 패턴([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%ED%81%AC%EB%A1%9C%EC%8A%A4%EC%9D%B8%EC%BD%94%EB%8D%94%EB%A6%AC%EB%9E%AD%EC%BB%A4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/cross_encoder_reranker.ipynb))
-5. Cohere Reranker 실습, Cohere 임베딩으로 1차 검색 후 Cohere 호스팅 rerank API(rerank-multilingual-v3.0)로 재정렬([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EC%BD%94%ED%9E%88%EC%96%B4%EB%A6%AC%EB%9E%AD%EC%BB%A4.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/cohere-reranker.ipynb))
-6. WebBaseLoader 실습, BeautifulSoup SoupStrainer로 웹페이지 특정 영역만 파싱, 여러 URL 동시 로드와 nest_asyncio를 이용한 비동기 로드([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80%EB%A1%9C%EB%8D%94.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/web_base_loader.ipynb))
-7. ParentDocumentRetriever 실습, 검색은 잘게 쪼갠 자식 조각으로 정밀하게 하고 반환은 더 큰 부모 단위로 돌려받는 구조, 부모 문서를 원본 그대로 두는 방식과 parent_splitter로 부모도 적당히 나누는 방식 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/%EB%B6%80%EB%AA%A8%EB%AC%B8%EC%84%9C%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0923/parent_document_retriever.ipynb))
+### 2026-09-08
+- **[FastAPI 기초](ex0908/fastapi_guide.md)** · [get](ex0908/main.py) · [put](ex0908/get_put.py) · [path parameters](ex0908/path_parameters.py) · [query parameters](ex0908/query_parameters.py)
 
-# 2026-09-28
+### 2026-09-07
+- **[Pydantic](ex0907/Pydantic.md)** · [코드 1](ex0907/pydantic.ipynb) · [코드 2](ex0907/day4_pydantic01.py) · [코드 3](ex0907/day4_pydantic02.py) · [코드 4](ex0907/day4_pydantic03.py)
+- [try…except 예외 처리](ex0907/try_except.ipynb)
+- [깃허브 충돌 해결 방법](ex0907/깃충돌해결법.md)
 
-1. RAG 실습(Reranker 기반 사내 문서 QA), 가상 사내 문서 PDF + FAISS + Cross Encoder Reranker로 RAG 파이프라인 구성, 직접 작성한 첫 버전과 보강한 버전을 비교하며 유사도 threshold 대신 시스템 프롬프트로 "문서에 없는 답"을 판별하도록 설계([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/RAG%EC%8B%A4%EC%8A%B5.md), [코드 1(직접 작성)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_01_0928.ipynb), [코드 2(보강)](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0928/rag_02_0928.ipynb))
+### 2026-09-04
+- GitHub 사용법
+- [GitHub Desktop 사용법](ex0904/깃허브데스크탑가이드.md)
+- [문자열, 클래스, 딕셔너리, NumPy](ex0904/0904.ipynb)
 
-# 2026-09-29
+### 2026-09-03
+- [파이썬 함수와 클래스](ex0903/0903.ipynb)
+- **[Streamlit](ex0903/streamlit가이드.md)** · [테스트 코드](ex0903/test.py)
 
-1. PDF 문서 기반 RAG 기본 파이프라인 실습, 문서 로드 → 분할 → 임베딩 → FAISS 저장 → 리트리버 → 프롬프트 → LLM → 체인 8단계를 하나씩 실행한 뒤 한 셀로 통합([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RAG기본파이프라인.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/rag-basic-pdf.ipynb))
-2. 문서 요약 실습, Stuff(한 번에 요약)/Map-Reduce(나눠 요약 후 합치기)/Map-Refine(요약을 순서대로 다듬기)/Chain of Density(반복하며 핵심 개체를 추가해 밀도 높이기) 네 가지 방식 비교, LangSmith Hub 프롬프트(`pull_prompt`)와 `@chain` 데코레이터 활용([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/문서요약.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/summary.ipynb))
-3. RAGAS 0.4로 RAG 평가용 합성 테스트 데이터셋 생성, `TestsetGenerator`가 PDF에서 지식 그래프를 만들어 질문·정답·근거 문서를 자동 생성, synthesizer별 질문 유형 분포 지정과 한국어 프롬프트 적용 후 CSV 저장([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RAGAS테스트데이터셋.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/ragas_test_dataset.ipynb))
-4. RunnablePassthrough 실습, 입력을 그대로 전달하는 `RunnablePassthrough()`와 기존 입력에 새 키를 추가하는 `.assign()` 비교, RunnableParallel 안에서의 동작 확인, RAG 체인에서 질문을 그대로 넘겨 context와 question을 동시에 구성([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/RunnablePassthrough.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0929/runnable_passthrough.ipynb))
+### 2026-09-02
+- [VS Code 설치](ex0902/VSCode설치가이드.md) · [Python 설치](ex0902/Python설치가이드.md) · [가상환경 세팅](ex0902/가상환경가이드.md)
+- [파이썬 기초](ex0902/0902.ipynb)
 
-# 2026-09-30
+### 2026-09-01
+- 한화빌딩 기업 탐방(오리엔테이션)
 
-1. RAG 실습 2(생성형 AI 윤리 가이드북 QA), 9월 28일에 만든 FAISS + Cross Encoder Reranker + 시스템 프롬프트 파이프라인을 30쪽 분량의 법·윤리 가이드북 PDF에 적용, 질문을 학생별 JSON 파일에서 불러오도록 변경, 문서 길이에 맞춰 검색 후보(k=8)와 Reranker 최종 문서 수(top_n=4) 조정, 참고 답안·근거 페이지 기준으로 채점해 3문제 모두 정답 확인, uv로 환경 구성([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG실습.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex0930/RAG.ipynb))
-
-# 2026-10-01
-
-1. ChatOpenAI로 첫 LLM 호출, system/human 메시지로 한국어를 영어로 번역하는 예제로 에이전트 개발 환경 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/ChatOpenAI번역.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/translation.py))
-2. 랭그래프(LangGraph) 기본 개념 실습, TypedDict와 Pydantic의 상태 정의 차이(실행 시 타입 검사 여부), 리듀서(`add`, `add_messages`)로 상태 값 누적·교체, `StateGraph`에 노드·엣지·조건부 엣지 추가([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/랭그래프기본개념.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1001/try_langgraph.ipynb))
-
-# 2026-10-02
-
-1. 랭그래프로 에이전트 설계하고 구현하기, 입력·출력·전체 상태를 나눠(`input_schema`/`output_schema`) 답변만 돌려주는 기본 그래프와, 질문 길이를 검사해 짧으면 LLM을 부르지 않고 끝내는 가드레일 노드 + 조건부 엣지 그래프를 `compile()` → `invoke()`까지 실행([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/랭그래프에이전트구현.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/design_agent.ipynb))
-2. 타빌리(Tavily) 검색 도구와 LLM 도구 호출, `TavilySearch` 검색 결과 형식과 ToolCall 형식으로 실행했을 때의 `ToolMessage` 확인, `@tool` 계산 도구와 검색 도구를 `bind_tools()`로 연결해 LLM이 도구 이름·인자(검색어 영어 변환, `time_range` 자동 지정)를 스스로 정하는 것과 도구 설명서만큼 입력 토큰이 늘어나는 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/타빌리검색도구호출.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1002/tavily_search.ipynb))
-
-# 2026-10-06
-
-1. 랭그래프로 웹 검색 에이전트 만들기, LLM이 요청한 `tool_calls`를 실제로 실행하는 도구 노드(`BasicToolNode`)와 `tool_calls` 유무로 분기하는 라우팅 함수를 만들어 `chatbot ↔ tools` 반복 구조 구현, `invoke`/`stream`(updates·values·messages)/`ainvoke`/`astream` 실행 방법 비교, `langgraph.json` + `langgraph dev`로 랭그래프 서버를 띄워 LangSmith Studio에서 노드 실행 과정 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/웹검색에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1006/web_agent.py))
-
-# 2026-10-07
-
-1. 코딩 에이전트 만들기, `@tool`·`parse_docstring`·pydantic `Field`로 LLM에게 전달되는 도구 설명서(이름·설명·인자 스키마) 비교, `exec()`로 코드를 실행하는 도구와 파일 저장 도구를 만들어 `create_agent`로 코드 작성 → 실행 확인 → 파일 저장 에이전트 구현, 실행 결과에서 병렬 도구 호출(`model → tools → tools → model`)과 print 출력이 LLM에게 전달되지 않는 한계 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/코딩에이전트.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/agent.py), [도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/tools.py), [사용자 정의 도구](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1007/coding_agent/custom_tools.ipynb))
-
-# 2026-10-08
-
-1. create_agent 미들웨어와 구조화 출력, `@wrap_model_call`로 대화 길이에 따라 모델 교체(`gpt-4o-mini` → `gpt-4o`), `@before_model`로 금지어 차단(그래프에 노드 추가), `@dynamic_prompt`와 런타임 컨텍스트로 호출·사용자 역할마다 시스템 프롬프트 변경, `ToolStrategy`로 연락처 정보를 pydantic 객체로 추출, 실행 결과에서 미들웨어가 모델 호출마다 실행되는 점(두 번째 검사 대상은 도구 결과, 한 질문 안에서 말투 변경) 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent미들웨어.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/create_agent/middleware.py))
-2. 벡터 데이터베이스에 문서 저장하고 검색하기, 264쪽 PDF(한글 맞춤법·표준어 규정 해설)를 `PyPDFLoader`로 불러와 500자 청크 510개로 나누고 `OpenAIEmbeddings`로 임베딩해 Chroma에 디스크 저장(`persist_directory`), "구개음화" 유사도 검색으로 관련 청크와 쪽 번호 확인, 셀을 다시 실행하면 같은 문서가 중복 저장되는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/벡터DB저장과검색.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/rag_agent/vector_retriever.ipynb))
-3. 검색 도구 만들기, 저장해 둔 Chroma DB를 다시 불러와 `as_retriever(k=3)`로 검색기를 만들고 `create_retriever_tool`로 에이전트용 검색 도구(`pdf_search`)로 감싸 "부엌이" 발음 질문으로 실행, 1순위(240쪽)에 정답이 있지만 관련 없는 청크도 섞이고 도구 결과에 쪽 번호가 빠지는 점, DB 경로가 틀리면 에러 없이 빈 결과가 나오는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/검색도구만들기.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/rag_agent/retriever.py))
-4. 랭그래프로 RAG 에이전트 완성, `MessagesState`를 확장한 상태(question·context·answer·retry_num)와 노드 5개(chatbot·retriever·context_organizer·transform_query·generate)로 그래프 구성, `with_structured_output`으로 검색 결과 관련성과 답변 환각을 yes/no로 평가해 질문 다시 쓰기(최대 3번)와 답변 재생성으로 분기, 가짜 LLM으로 분기별 경로를 확인하다 찾은 문제(답변 재생성에 횟수 제한이 없어 `GraphRecursionError`, 재검색 때 출력 루프 `AttributeError`, 같은 스레드에서 재시도 횟수가 다음 질문으로 이어짐, `langgraph dev` 실행 시 `.env`·DB 경로 불일치) 수정, 실제 실행에서 정의 조항(245쪽)이 검색되지 않고 검색 결과 정리 단계(LLM)가 원문을 고쳐 써서 답변의 출처 쪽 번호가 틀리는 점을 확인하고, 정리를 코드로 바꾸고 검색 개수(k=5)와 검색 결과 평가 기준(답하기에 충분한가)을 수정해 다시 실행, 답변에 핵심 조건(모음 'ㅣ' 앞에서)이 들어가고 출처 왜곡이 사라진 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/RAG에이전트그래프.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1008/rag_agent/agent.py))
-
-# 2026-10-12
-
-(이날부터 책 대신 강사님이 직접 만든 자료로 수업 진행)
-
-1. 실습 환경 구축, OpenAI·Gemini API 키를 코드가 아닌 윈도우 환경변수(`setx`)로 등록, Ollama 로컬 모델(`llama3.1`, `exaone3.5`) 내려받기, `venv` 가상환경 생성과 `requirements.txt` 설치, `ipykernel`로 노트북 커널 등록([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/실습환경구축.md))
-2. 다양한 방법으로 LLM 연동하기, Ollama 로컬 모델(`llama3.1`, `exaone3.5`)을 REST·OpenAI 호환 엔드포인트·`ollama` 라이브러리로 호출, Gemini를 OpenAI 호환 엔드포인트와 `google-genai` SDK로 호출, OpenAI `chat.completions`와 `responses` 비교, `previous_response_id`·`conversation`으로 서버 측 대화 기억, temperature 비교, 이미지 분석·생성(`gpt-image-2`)·스트리밍, 임베딩 코사인 유사도와 단어 벡터 연산(king − man + woman), 시스템·Few-shot·CoT 프롬프트([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/LLM연동하기.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/exam1.ipynb))
-3. LLM에 도구(Function) 연결하기, 파이썬 함수와 JSON Schema 명세로 도구를 만들고 `function_call` → 실행 → `function_call_output`을 반복하는 에이전트 루프 구현, 현재 시각 도구와 `wttr.in` 실시간 날씨 도구(인자 `location`)로 한 질문에 도구 호출이 여러 개 오는 것 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/도구호출.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1012/exam2.ipynb))
-
-# 2026-10-13
-
-1. OpenAI 도구 3가지(Function, 빌트인, MCP) 비교, Tool Schema 작성 원칙(언제 쓰고 언제 쓰지 말지 적기, `strict` 모드), 빌트인 `web_search`로 학습 이후 날짜의 뉴스 검색, 외부 MCP 서버(Open-Meteo)를 `allowed_tools`로 제한해 연결하고 에이전트 루프 없이 요청 한 번으로 서울 날씨 조회([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/빌트인툴과MCP.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/exam2.ipynb))
-2. 정적 웹 페이지 수집, `urllib`·`requests`로 GET/POST 요청과 바이트·인코딩 처리, `BeautifulSoup`의 `find`·`select`로 스크래핑, YES24 파이썬 도서 10페이지 240권 수집과 CSV 저장 시 쉼표·인덱스 열 문제 확인, 같은 작업을 Gemini·ChatGPT에 시켜 코드 비교([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/정적웹수집.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/dataexam/exam1.ipynb))
-3. 오픈 API로 데이터 수집, 서울시 버스 노선·청소년 강좌·지하철 승하차(XML)와 네이버 블로그·뉴스 검색(JSON) 호출, 버스 API 결과가 운행 대수가 아니라 정류소 수라는 점 확인, 코드와 출력에 들어 있던 API 키를 환경변수로 바꾸고 출력의 키를 가려서 정리([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/오픈API수집.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/dataexam/exam2.ipynb))
-4. 동적 웹 페이지 수집, Selenium으로 검색 입력·클릭·명시적 대기(`WebDriverWait`)·스크롤·스크린샷, 스타벅스 매장 목록이 `urllib`으로는 빈 리스트이고 Selenium으로는 수집되는 차이 확인, 메가박스 관람평 300건과 YES24 리뷰 수집([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/동적웹수집.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1013/dataexam/exam3.ipynb))
-
-# 2026-10-14
-
-1. FastAPI 시작하기, `@app.get` 라우팅과 JSON 응답, 경로 파라미터(타입 변환·`Enum`·`:path`)와 쿼리 파라미터(기본값·선택·필수), 타입이 틀리거나 값이 빠지면 422로 응답되는 것 확인, `StaticFiles`로 정적 파일 연결([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/라우팅과파라미터.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/exam3.py))
-2. FastAPI로 HTML 응답하기, `HTMLResponse`와 Jinja2 템플릿(`TemplateResponse`, `{{ }}`로 값 넘기기, `url_for`로 주소 만들기), 폼 제출과 AJAX(`XMLHttpRequest`) 비교, `setInterval` 주기적 AJAX, 수업 환경(starlette 1.7.0)에서 옛 `TemplateResponse` 호출 방식이 `TypeError`를 내는 것을 찾아 수정([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/템플릿과AJAX.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/exam9_1.py))
-3. 요청 본문과 검증, pydantic 모델로 POST·PUT 본문 받기(`status_code=201`), `Query`·`Path`로 길이·정규식·범위 검증, `HTTPException`으로 404 응답, `response_model`로 응답 필드 거르기, `tax=0`이면 `if item.tax`가 거짓이 되는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/요청본문과검증.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/exam14.py))
-4. 폼 데이터와 파일 업로드, `Form()`으로 폼 값 받기, `lifespan`으로 서버 시작·종료 시 코드 실행, `bytes`·`UploadFile`로 단일·다중 파일 업로드와 서버 저장, 파일 이름을 그대로 경로에 쓰면 `../`로 저장 폴더 밖에 파일이 써지는 경로 조작 문제를 재현하고 `os.path.basename`으로 수정([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/폼과파일업로드.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1014/exam18.py))
-
-# 2026-10-15
-
-1. 임베딩과 벡터 DB, 임베딩의 원리와 발전 과정(원-핫 → Word2Vec → BERT → LLM 임베딩)과 코사인 유사도, 도커로 pgvector를 띄워 OpenAI 임베딩을 저장하고 SQL(`<=>` 코사인 거리)로 유사도 검색, `LIMIT k`만 쓰면 관련 없는 문서도 나오고 실제 유사도 값(정답 0.546, '강아지'와 '반려견' 0.26 < '자동차' 0.28)이 강의 해석표 기준보다 훨씬 낮아 임계값을 데이터로 정해야 하는 점 확인([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/임베딩과벡터DB.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/exam3.ipynb))
-2. RAG 구현, 검색·증강·생성 3단계로 노트북 RAG 만들기, 항공 이용 가이드를 소제목 단위 15개 청크로 적재, FastAPI로 벡터 DB 관리 API(저장·일괄 저장·유사도 검색·메타데이터 필터·RAG·목록·삭제)와 Streamlit RAG 챗봇 구현, PDF를 페이지+overlap 청크로 적재해 검색, 실행해 보며 중복 저장 문제와 임계값에 따른 검색 결과 차이(0.3 → 2개, 0.5 → 0개), 관련 없는 질문에 "문서에서 확인되지 않습니다"로 답하는 것 확인, 챗봇 시스템 프롬프트의 데이터 불일치(호텔 → 항공) 수정([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/RAG.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/fastapiedu/exam21.py))
-3. 도구를 쓰는 AI 에이전트를 FastAPI 서버로, Chat Completions 도구 호출 루프(`MAX_STEPS`)와 `session_id` 대화 유지, Streamlit 채팅 화면, `ast` 계산기 도구가 큰 거듭제곱(`9**9**8`)으로 서버를 멈출 수 있는 문제를 재현하고 결과 크기 제한으로 수정([정리한 문서](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/FastAPI_AI에이전트서버.md), [코드](https://github.com/TechieMoon/hanwha_0902/blob/main/ex1015/fastapiedu/exam19.py))
+</details>
