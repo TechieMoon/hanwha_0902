@@ -14,10 +14,10 @@
 |---|---|---|---|
 | 개발 환경 | VS Code, 가상환경, GitHub, API 키 관리, 도커 | API 키는 코드가 아니라 환경변수·`.env`에 두고, `.env`는 `.gitignore`에 넣는다 | [가상환경](ex0902/가상환경가이드.md) · [깃 충돌 해결](ex0907/깃충돌해결법.md) · [실습 환경 구축](ex1012/실습환경구축.md) |
 | 파이썬과 데이터 | 기본 문법, Pydantic, 예외 처리, NumPy, Pandas | 타입 힌트와 Pydantic 모델이 곧 검증 규칙이다 (FastAPI도 같은 원리) | [Pydantic](ex0907/Pydantic.md) · [판다스 기초](ex0916/판다스기초.md) |
-| LLM 호출과 프롬프트 | LangChain, 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력(LangChain·OpenAI SDK·Ollama), 캐싱, 대화 메모리, Gemini·Ollama 연동 | 프롬프트는 템플릿으로 분리하고, 결과는 구조화 출력으로 받아야 코드에서 다루기 쉽다 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) · [구조화된 출력(SDK)](ex1016/구조화된출력.md) |
+| LLM 호출과 프롬프트 | LangChain, LCEL·Runnable(병렬·분기·라우팅), 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력(LangChain·OpenAI SDK·Ollama), 캐싱, 대화 메모리, Gemini·Ollama 연동 | 프롬프트는 템플릿으로 분리하고, 결과는 구조화 출력으로 받아야 코드에서 다루기 쉽다 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) · [구조화된 출력(SDK)](ex1016/구조화된출력.md) · [LangChain 입문](ex1019/LangChain입문.md) · [LCEL과 Runnable](ex1019/LCEL과Runnable.md) |
 | 문서 처리와 벡터 DB | 문서 로더, 텍스트 분할, 임베딩, Chroma, FAISS, pgvector | 청크 크기·겹침과 임베딩 모델이 검색 품질을 정한다. 저장과 검색은 같은 모델로 | [재귀 텍스트 분할](ex0921/재귀문자텍스트분할.md) · [OpenAI 임베딩](ex0922/OpenAI임베딩.md) · [Chroma](ex0922/크로마벡터스토어.md) · [임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md) |
 | 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터 | 답이 틀리면 검색부터 의심한다: 검색 개수(k) → 임계값 → 청크 → 리랭커 순서로 확인 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) |
-| 도구 호출과 에이전트 | LangGraph(상태·노드·엣지), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어, Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) |
+| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어, Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) |
 | 웹 서비스 | FastAPI(라우팅, 검증, 템플릿, 파일 업로드), Streamlit, 에이전트·RAG를 REST API로 서비스 | 입력 검증은 타입 힌트로, 외부에서 온 값(파일 이름 등)은 그대로 믿지 않는다 | [FastAPI와 Streamlit](ex0910/streamlit_fastapi.md) · [요청 본문과 검증](ex1014/요청본문과검증.md) · [AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md) |
 | 웹 데이터 수집 | requests·BeautifulSoup, 공공·네이버 Open API, Selenium | HTML에 내용이 있으면 requests, 자바스크립트가 그리면 Selenium. 수집한 남의 글과 키는 공개 주의 | [정적 수집](ex1013/정적웹수집.md) · [오픈 API 수집](ex1013/오픈API수집.md) · [동적 수집](ex1013/동적웹수집.md) |
 
@@ -31,12 +31,15 @@
 - 원문이 그대로 필요한 단계(검색 결과 정리 등)는 **LLM에 맡기지 말고 코드로** 처리한다. LLM이 원문을 고쳐 써서 출처 쪽 번호가 틀렸다. ([10/08](ex1008/RAG에이전트그래프.md))
 - 여러 LLM의 답을 합칠 때는 **각 호출이 성공했는지 먼저 확인**한다. 없는 메서드를 불러 생긴 에러 문자열을 종합 모델이 답변으로 평가했다. ([10/16](ex1016/다중LLM과ReAct.md))
 - 에이전트가 도구를 다 불러도 **마지막 판단은 틀릴 수 있다.** 예산 초과 장소를 1순위로 추천했다. 숫자 조건은 코드로 다시 검사한다. ([10/16](ex1016/다중LLM과ReAct.md))
+- 구조화 출력은 **형식만 보장한다.** 스키마 검증을 통과해도 값이 맞는지는 도구 결과와 따로 비교한다. ([10/19](ex1019/도구호출과MCP.md))
 - LLM이 호출하는 도구는 **입력 크기와 실행 시간에 상한**을 둔다. 계산기 도구에 큰 거듭제곱을 넣자 서버가 멈췄다. ([10/15](ex1015/FastAPI_AI에이전트서버.md))
 
 **RAG와 검색**
 - 검색 임계값은 강의 자료의 숫자를 믿지 말고 **내 데이터로 유사도를 먼저 찍어 보고** 정한다. 정답도 0.3 ~ 0.5대였다. ([10/15](ex1015/RAG.md))
 - **단어 하나끼리의 임베딩 유사도는 믿기 어렵다.** '강아지-반려견'이 '강아지-자동차'보다 낮게 나왔다. 문장으로 비교한다. ([10/15](ex1015/임베딩과벡터DB.md))
 - 같은 문서를 다시 넣으면 그대로 **중복 저장**된다. 저장 전에 중복을 확인한다. ([10/08](ex1008/벡터DB저장과검색.md), [10/15](ex1015/RAG.md))
+- **모델이 모르는 최신 용어는 그럴듯하게 지어낸다.** GPT·EXAONE·Llama 모두 "LCEL"을 매번 다른 약자로 설명했고, 설명 문서를 context로 넣은 RAG 체인만 맞게 답했다. ([10/19](ex1019/LCEL과Runnable.md))
+- 웹 검색 도구를 붙여도 **"오늘" 같은 날짜 조건은 느슨하게 처리된다.** 오늘 소식을 물었는데 몇 달 전 기사가 섞였다. 출처 날짜를 확인한다. ([10/19](ex1019/도구호출과MCP.md))
 - "문서에 없는 답"은 임계값만이 아니라 **시스템 프롬프트로도** 막는다. ([09/28](ex0928/RAG실습.md))
 
 **웹 서비스와 보안**
@@ -50,6 +53,12 @@
 
 <details open>
 <summary><b>2026년 10월</b></summary>
+
+### 2026-10-19
+- **[AI 에이전트 이론](ex1019/AI에이전트이론.md)** — 챗봇 vs 에이전트, 하네스 구성 요소, 에이전트 설계 8단계, LangChain vs LangGraph, 멀티 에이전트 오케스트레이션 4패턴
+- **[LangChain 입문](ex1019/LangChain입문.md)** — OpenAI SDK vs LangChain, `ChatOpenAI`·`ChatOllama`, 메시지 역할, 프롬프트 템플릿, `prompt | llm | parser` · [코드](ex1019/exam1.ipynb)
+- **[LCEL과 Runnable](ex1019/LCEL과Runnable.md)** — Runnable·병렬·assign·분기·동적 라우팅, fake retriever RAG, "LCEL"을 지어낸 모델들과 RAG로 바로잡기 · [코드](ex1019/exam2.ipynb)
+- **[도구 호출과 MCP](ex1019/도구호출과MCP.md)** — `@tool`, `create_agent` 실행 루프, `response_format` 구조화 출력, 내장 웹 검색, 원격 MCP 서버 도구 · [코드](ex1019/exam3.ipynb)
 
 ### 2026-10-16
 - **[다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md)** — GPT·Gemini·EXAONE 병렬 종합과 순차 파이프라인(설계→구현→검증), ReAct 루프, 재시도, Human-in-the-loop · [코드](ex1016/exam4.ipynb)
