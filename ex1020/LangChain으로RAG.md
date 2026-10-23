@@ -7,7 +7,7 @@
 > - LCEL은 조립을 쉽게 할 뿐 **검색 정확도나 사실성을 올려 주지 않는다**
 > - 같은 체인으로 항공 가이드(15건), ERP PDF(28쪽)까지 문서 집합만 바꿔 재사용, `batch()`로 질문 여러 개를 한 번에 처리
 
-- 코드: [`exam4.ipynb`](exam4.ipynb) (강사님 자료 `fwedu/exam4.ipynb` 사본, 슬라이드 이미지는 자리만 표시, 📝 정리 셀 추가)
+- 코드: [`exam4.ipynb`](exam4.ipynb) (강사님 자료 `fwedu/exam4.ipynb` 사본, 강의 슬라이드 이미지 포함, 📝 정리 셀 추가)
 - 실행 환경: langchain 1.4.6, langchain-postgres 0.0.19, PostgreSQL + pgvector(도커 `edupgvector`), `text-embedding-3-small`(1536차원), `gpt-4o-mini`
 - 이전 방식: [10/15 RAG](../ex1015/RAG.md) · [임베딩과 벡터 DB](../ex1015/임베딩과벡터DB.md) · [10/19 LCEL과 Runnable](../ex1019/LCEL과Runnable.md)
 - 샘플 문서 중 강사님 개인 정보(이름·별명·사는 곳)가 들어 있던 문장은 사본에서 **가상의 값(홍길동 등)으로 바꿨다.** 유사도 점수는 원래 문장으로 계산된 값이다.

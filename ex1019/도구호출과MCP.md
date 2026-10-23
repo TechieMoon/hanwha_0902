@@ -7,7 +7,7 @@
 > - `response_format=Pydantic모델` → `result["structured_response"]`에 검증된 객체. 단, **형식만 보장하고 사실은 보장하지 않는다**
 > - MCP: 외부 서버가 공개한 도구를 `MultiServerMCPClient.get_tools()`로 가져와 같은 에이전트에 꽂는다
 
-- 코드: [`exam3.ipynb`](exam3.ipynb) (강사님 자료 `fwedu/exam3.ipynb` 사본, 슬라이드 이미지는 자리만 표시, 📝 정리 셀 추가)
+- 코드: [`exam3.ipynb`](exam3.ipynb) (강사님 자료 `fwedu/exam3.ipynb` 사본, 강의 슬라이드 이미지 포함, 📝 정리 셀 추가)
 - 실행 환경: langchain 1.4.6, langchain-core 1.6.12, langchain-openai 1.7.2, langchain-mcp-adapters 0.3.2, pydantic 2.14.1
 - 10/12~10/16에 OpenAI SDK로 직접 짰던 도구 호출 루프([도구 호출](../ex1012/도구호출.md), [ReAct](../ex1016/다중LLM과ReAct.md))를 LangChain이 대신 돌려 주는 버전이다.
 

@@ -17,7 +17,7 @@
 | LLM 호출과 프롬프트 | LangChain, LCEL·Runnable(병렬·분기·라우팅), 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력(LangChain·OpenAI SDK·Ollama), 캐싱, 대화 메모리, Gemini·Ollama 연동 | 프롬프트는 템플릿으로 분리하고, 결과는 구조화 출력으로 받아야 코드에서 다루기 쉽다 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) · [구조화된 출력(SDK)](ex1016/구조화된출력.md) · [LangChain 입문](ex1019/LangChain입문.md) · [LCEL과 Runnable](ex1019/LCEL과Runnable.md) |
 | 문서 처리와 벡터 DB | 문서 로더, 텍스트 분할, 임베딩, Chroma, FAISS, pgvector | 청크 크기·겹침과 임베딩 모델이 검색 품질을 정한다. 저장과 검색은 같은 모델로 | [재귀 텍스트 분할](ex0921/재귀문자텍스트분할.md) · [OpenAI 임베딩](ex0922/OpenAI임베딩.md) · [Chroma](ex0922/크로마벡터스토어.md) · [임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md) |
 | 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터 | 답이 틀리면 검색부터 의심한다: 검색 개수(k) → 임계값 → 청크 → 리랭커 순서로 확인 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) · [LangChain으로 RAG](ex1020/LangChain으로RAG.md) |
-| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어, Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) |
+| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어(요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기), 단기·장기 메모리(PostgreSQL 영구 저장), Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) · [단기·장기 메모리](ex1021/단기장기메모리.md) · [미들웨어](ex1021/미들웨어.md) |
 | 웹 서비스 | FastAPI(라우팅, 검증, 템플릿, 파일 업로드), Streamlit, 에이전트·RAG를 REST API로 서비스 | 입력 검증은 타입 힌트로, 외부에서 온 값(파일 이름 등)은 그대로 믿지 않는다 | [FastAPI와 Streamlit](ex0910/streamlit_fastapi.md) · [요청 본문과 검증](ex1014/요청본문과검증.md) · [AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md) |
 | 웹 데이터 수집 | requests·BeautifulSoup, 공공·네이버 Open API, Selenium | HTML에 내용이 있으면 requests, 자바스크립트가 그리면 Selenium. 수집한 남의 글과 키는 공개 주의 | [정적 수집](ex1013/정적웹수집.md) · [오픈 API 수집](ex1013/오픈API수집.md) · [동적 수집](ex1013/동적웹수집.md) |
 
@@ -33,6 +33,8 @@
 - 에이전트가 도구를 다 불러도 **마지막 판단은 틀릴 수 있다.** 예산 초과 장소를 1순위로 추천했다. 숫자 조건은 코드로 다시 검사한다. ([10/16](ex1016/다중LLM과ReAct.md), LangChain으로 바꾼 [10/20](ex1020/다중LLM과ReAct_LangChain.md)에도 똑같이)
 - 작은 로컬 모델은 **지시(언어·형식)를 무시하고 `<think>` 추론을 답에 섞는다.** "파이썬 코드만" 달라고 했는데 TypeScript 명세서가 왔고, 검증 모델도 이 점을 놓쳤다. 다음 단계로 넘기기 전에 형식은 코드로 검사한다. ([10/20](ex1020/다중LLM과ReAct_LangChain.md))
 - "도구로 확인해줘"라고 해도 도구가 실패하면 모델이 **스스로 계산해 답할 수 있다.** 도구 결과가 꼭 필요한 값은 실제로 쓰였는지 확인한다. ([10/20](ex1020/다중LLM과ReAct_LangChain.md))
+- 대화 요약은 **원래 단어를 바꿀 수 있다.** 요약 미들웨어의 기본 프롬프트가 영어라 "등산"이 요약을 거치며 "하이킹"이 됐다. 한국어 서비스는 요약 프롬프트도 한국어로, 고유명사는 그대로 두라고 지시한다. ([10/21](ex1021/미들웨어.md))
+- 장기 메모리를 시험할 때는 **처음 쓰는 대화방**으로 묻는다. 이미 대화가 쌓인 방에서는 모델이 단기 메모리만 보고 답해서 장기 메모리 조회가 일어나지 않았다. ([10/21](ex1021/단기장기메모리.md))
 - 구조화 출력은 **형식만 보장한다.** 스키마 검증을 통과해도 값이 맞는지는 도구 결과와 따로 비교한다. ([10/19](ex1019/도구호출과MCP.md))
 - LLM이 호출하는 도구는 **입력 크기와 실행 시간에 상한**을 둔다. 계산기 도구에 큰 거듭제곱을 넣자 서버가 멈췄다. ([10/15](ex1015/FastAPI_AI에이전트서버.md))
 
@@ -55,6 +57,10 @@
 
 <details open>
 <summary><b>2026년 10월</b></summary>
+
+### 2026-10-21
+- **[단기·장기 메모리](ex1021/단기장기메모리.md)** — `thread_id`별 대화 기록(checkpointer)과 사용자별 메모장(store), 메모리 없음/단기/단기+장기 비교, PostgreSQL로 재시작 후에도 유지 · [코드](ex1021/exam6.ipynb)
+- **[미들웨어](ex1021/미들웨어.md)** — 훅 6가지의 실행 순서, 요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기·할 일 목록, 배송 상담·쇼핑 주문 응용 · [코드](ex1021/exam7.ipynb)
 
 ### 2026-10-20
 - **[LangChain으로 RAG](ex1020/LangChain으로RAG.md)** — `PGVectorStore`(pgvector)에 `add_documents`로 저장, retriever 검색, LCEL 없이 vs LCEL RAG 비교, PDF 적재, `batch` · [코드](ex1020/exam4.ipynb)

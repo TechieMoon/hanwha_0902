@@ -8,7 +8,7 @@
 
 10월 12일부터 강사님이 직접 만든 자료로 수업이 진행됐다. 첫 시간에는 같은 일을 여러 LLM과 여러 방식으로 호출해 보면서 차이를 비교했다. 로컬 모델(Ollama), Gemini, OpenAI를 써 봤고, OpenAI로는 대화 기억, temperature, 이미지 분석·생성, 스트리밍, 임베딩, 프롬프트 기법까지 실습했다.
 
-- 코드: [`exam1.ipynb`](exam1.ipynb) (강의 슬라이드 이미지는 빼고, 실행 결과를 보고 정리한 **📝 정리** 셀을 추가한 사본)
+- 코드: [`exam1.ipynb`](exam1.ipynb) (강의 슬라이드 이미지 포함, 실행 결과를 보고 정리한 **📝 정리** 셀을 추가한 사본)
 - 실행 환경: 강사님이 준 `requirements.txt`로 만든 가상환경(`eduvenv`, Python 3.12.10)
 - API 키: 코드에 직접 쓰지 않고 환경변수(`OPENAI_API_KEY`, `GEMINI_API_KEY`)에서 읽는다.
 

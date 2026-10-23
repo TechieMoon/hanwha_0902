@@ -7,7 +7,7 @@
 > - `PromptTemplate`(문자열 하나)과 `ChatPromptTemplate`(역할별 메시지)으로 프롬프트를 재사용
 > - `prompt | llm | StrOutputParser()` — 모델만 바꿔 끼워도 같은 체인을 재사용할 수 있다
 
-- 코드: [`exam1.ipynb`](exam1.ipynb) (강사님 자료 `fwedu/exam1.ipynb` 사본, 슬라이드 이미지는 자리만 표시, 📝 정리 셀 추가)
+- 코드: [`exam1.ipynb`](exam1.ipynb) (강사님 자료 `fwedu/exam1.ipynb` 사본, 강의 슬라이드 이미지 포함, 📝 정리 셀 추가)
 - 실행 환경: langchain 1.4.6, langchain-core 1.6.12, langchain-openai 1.7.2, langchain-ollama 1.1.0
 - 9월에 책으로 배운 내용([LangChain](../ex0914/랭체인.md), [프롬프트 템플릿](../ex0915/프롬프트템플릿.md))을 강사님 자료로 다시 정리한 날이다.
 

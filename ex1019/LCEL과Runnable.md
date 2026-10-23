@@ -7,7 +7,7 @@
 > - 체인을 만들 때 제일 많이 틀리는 것은 문법이 아니라 **단계 사이 입력·출력의 모양**(dict? 문자열?)
 > - 이날 가장 큰 교훈: **모델이 모르는 최신 용어("LCEL")는 그럴듯하게 지어낸다.** 같은 질문도 context를 넣은 RAG 체인은 맞게 답했다
 
-- 코드: [`exam2.ipynb`](exam2.ipynb) (강사님 자료 `fwedu/exam2.ipynb` 사본, 슬라이드 이미지는 자리만 표시, 📝 정리 셀 추가)
+- 코드: [`exam2.ipynb`](exam2.ipynb) (강사님 자료 `fwedu/exam2.ipynb` 사본, 강의 슬라이드 이미지 포함, 📝 정리 셀 추가)
 - 9월에 책으로 배운 [RunnablePassthrough](../ex0929/RunnablePassthrough.md)와 [RAG 기본 파이프라인](../ex0929/RAG기본파이프라인.md)을 다시 다뤘다.
 
 ## 1. Runnable과 LCEL (LLM 없이)

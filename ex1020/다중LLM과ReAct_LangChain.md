@@ -7,7 +7,7 @@
 > - ReAct: `bind_tools` + `ToolMessage`로 루프를 직접 짜 보고, **`create_agent`** 로 같은 일을 맡김 (`stream_mode="updates"`로 Thought/Action/Observation 출력)
 > - 실행 결과에서 본 문제: 작은 로컬 모델이 **`<think>` 추론을 답에 섞고 지시(파이썬 코드만)를 무시**, 에이전트가 **도구 결과 없이 스스로 계산**하거나 **예산 초과 장소를 1순위로 추천**
 
-- 코드: [`exam5.ipynb`](exam5.ipynb) (강사님 자료 `fwedu/exam5.ipynb` 사본, 슬라이드 이미지는 자리만 표시, 📝 정리 셀 추가)
+- 코드: [`exam5.ipynb`](exam5.ipynb) (강사님 자료 `fwedu/exam5.ipynb` 사본, 강의 슬라이드 이미지 포함, 📝 정리 셀 추가)
 - 모델: `gpt-4o-mini`, `gemini-3.5-flash-lite`(langchain-google-genai 4.4.2), Ollama `exaone4.0`(EXAONE 4.0 1.2B)
 
 ## 1. SDK 직접 호출 → LangChain
