@@ -17,7 +17,7 @@
 | LLM 호출과 프롬프트 | LangChain, LCEL·Runnable(병렬·분기·라우팅), 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력(LangChain·OpenAI SDK·Ollama), 캐싱, 대화 메모리, Gemini·Ollama 연동 | 프롬프트는 템플릿으로 분리하고, 결과는 구조화 출력으로 받아야 코드에서 다루기 쉽다 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) · [구조화된 출력(SDK)](ex1016/구조화된출력.md) · [LangChain 입문](ex1019/LangChain입문.md) · [LCEL과 Runnable](ex1019/LCEL과Runnable.md) |
 | 문서 처리와 벡터 DB | 문서 로더, 텍스트 분할, 임베딩, Chroma, FAISS, pgvector | 청크 크기·겹침과 임베딩 모델이 검색 품질을 정한다. 저장과 검색은 같은 모델로 | [재귀 텍스트 분할](ex0921/재귀문자텍스트분할.md) · [OpenAI 임베딩](ex0922/OpenAI임베딩.md) · [Chroma](ex0922/크로마벡터스토어.md) · [임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md) |
 | 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터 | 답이 틀리면 검색부터 의심한다: 검색 개수(k) → 임계값 → 청크 → 리랭커 순서로 확인 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) · [LangChain으로 RAG](ex1020/LangChain으로RAG.md) |
-| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지, 리듀서, 조건부 엣지·반복, 병렬·Send·Command, 런타임 컨텍스트), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어(요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기), 단기·장기 메모리(PostgreSQL 영구 저장), Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [LangGraph 기본](ex1023/LangGraph기본.md) · [LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) · [단기·장기 메모리](ex1021/단기장기메모리.md) · [미들웨어](ex1021/미들웨어.md) |
+| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지, 리듀서, 조건부 엣지·반복, 병렬·Send·Command, 런타임 컨텍스트, ToolNode ReAct, 체크포인터·Store, interrupt·RetryPolicy·서브그래프), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어(요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기), 단기·장기 메모리(PostgreSQL 영구 저장), Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [LangGraph 기본](ex1023/LangGraph기본.md) · [LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md) · [LangGraph 에이전트와 운영](ex1023/LangGraph에이전트와운영.md) · [에이전트 데이터 관리](ex1023/에이전트데이터관리.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) · [단기·장기 메모리](ex1021/단기장기메모리.md) · [미들웨어](ex1021/미들웨어.md) |
 | 웹 서비스 | FastAPI(라우팅, 검증, 템플릿, 파일 업로드), Streamlit, 에이전트·RAG를 REST API로 서비스 | 입력 검증은 타입 힌트로, 외부에서 온 값(파일 이름 등)은 그대로 믿지 않는다 | [FastAPI와 Streamlit](ex0910/streamlit_fastapi.md) · [요청 본문과 검증](ex1014/요청본문과검증.md) · [AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md) |
 | 웹 데이터 수집 | requests·BeautifulSoup, 공공·네이버 Open API, Selenium | HTML에 내용이 있으면 requests, 자바스크립트가 그리면 Selenium. 수집한 남의 글과 키는 공개 주의 | [정적 수집](ex1013/정적웹수집.md) · [오픈 API 수집](ex1013/오픈API수집.md) · [동적 수집](ex1013/동적웹수집.md) |
 
@@ -35,6 +35,7 @@
 - "도구로 확인해줘"라고 해도 도구가 실패하면 모델이 **스스로 계산해 답할 수 있다.** 도구 결과가 꼭 필요한 값은 실제로 쓰였는지 확인한다. ([10/20](ex1020/다중LLM과ReAct_LangChain.md))
 - 대화 요약은 **원래 단어를 바꿀 수 있다.** 요약 미들웨어의 기본 프롬프트가 영어라 "등산"이 요약을 거치며 "하이킹"이 됐다. 한국어 서비스는 요약 프롬프트도 한국어로, 고유명사는 그대로 두라고 지시한다. ([10/21](ex1021/미들웨어.md))
 - 장기 메모리를 시험할 때는 **처음 쓰는 대화방**으로 묻는다. 이미 대화가 쌓인 방에서는 모델이 단기 메모리만 보고 답해서 장기 메모리 조회가 일어나지 않았다. ([10/21](ex1021/단기장기메모리.md))
+- 사람 승인으로 멈췄다 재개하면 **노드가 처음부터 다시 실행된다.** 승인 노드의 로그가 두 번 찍혔다. `interrupt()` 앞에는 결제·DB 쓰기 같은 동작을 두지 않는다. ([10/23](ex1023/LangGraph에이전트와운영.md))
 - 구조화 출력은 **형식만 보장한다.** 스키마 검증을 통과해도 값이 맞는지는 도구 결과와 따로 비교한다. ([10/19](ex1019/도구호출과MCP.md))
 - LLM이 호출하는 도구는 **입력 크기와 실행 시간에 상한**을 둔다. 계산기 도구에 큰 거듭제곱을 넣자 서버가 멈췄다. ([10/15](ex1015/FastAPI_AI에이전트서버.md))
 
@@ -61,6 +62,8 @@
 ### 2026-10-23
 - **[LangGraph 기본](ex1023/LangGraph기본.md)** — State·Node·Edge와 슈퍼스텝, 첫 그래프와 순차 실행, `stream_mode` updates/values, TypedDict·dataclass·Pydantic State와 입력·출력 스키마 · [코드](ex1023/exam8.ipynb)
 - **[LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md)** — 리듀서(`operator.add`, `add_messages`), 조건부 엣지와 반복(`recursion_limit`), 병렬 fan-out/fan-in, `Send`, `Command`, 런타임 컨텍스트 · [코드](ex1023/exam9.ipynb)
+- **[LangGraph 에이전트와 운영](ex1023/LangGraph에이전트와운영.md)** — LLM 노드·LLM 라우터·`ToolNode` ReAct, 체크포인터와 상태 이력, `stream_mode` 5가지, `interrupt` 사람 승인, `RetryPolicy`, 서브그래프, 피드백 글쓰기 에이전트 · [코드](ex1023/exam10.ipynb)
+- **[에이전트 데이터 관리](ex1023/에이전트데이터관리.md)** — State·Reducer·Messages·Context·Checkpointer·Store를 데이터 통로로 구분, Store는 코드가 꺼내 줘야 쓰인다 · [코드](ex1023/exam11.ipynb)
 
 ### 2026-10-21
 - **[단기·장기 메모리](ex1021/단기장기메모리.md)** — `thread_id`별 대화 기록(checkpointer)과 사용자별 메모장(store), 메모리 없음/단기/단기+장기 비교, PostgreSQL로 재시작 후에도 유지 · [코드](ex1021/exam6.ipynb)
