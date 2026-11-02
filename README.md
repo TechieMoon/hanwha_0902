@@ -4,7 +4,7 @@
 > LLM 오케스트레이션부터 RAG, 멀티 에이전트 배포까지 배운 내용을 날짜별로 기록한 저장소입니다.
 > 실습 코드에는 주석을 달고, 직접 실행한 결과를 보고 확인한 점을 문서로 정리했습니다.
 
-**사용 기술** · Python · LangChain · LangGraph · OpenAI API · FastAPI · Streamlit · Chroma · FAISS · pgvector(PostgreSQL) · Docker · Selenium
+**사용 기술** · Python · LangChain · LangGraph · OpenAI API · FastAPI · Streamlit · Chroma · FAISS · pgvector(PostgreSQL) · Neo4j · LangSmith · Docker · Selenium
 
 책 『만들면서 배우는 AI 에이전트 개발 입문+실전』 실습은 책 목차 순서로 [agent 저장소](https://github.com/TechieMoon/agent)에도 정리했습니다.
 
@@ -16,8 +16,8 @@
 | 파이썬과 데이터 | 기본 문법, Pydantic, 예외 처리, NumPy, Pandas | 타입 힌트와 Pydantic 모델이 곧 검증 규칙이다 (FastAPI도 같은 원리) | [Pydantic](ex0907/Pydantic.md) · [판다스 기초](ex0916/판다스기초.md) |
 | LLM 호출과 프롬프트 | LangChain, LCEL·Runnable(병렬·분기·라우팅), 프롬프트 템플릿, Few-shot, 출력 파서, 구조화 출력(LangChain·OpenAI SDK·Ollama), 캐싱, 대화 메모리, Gemini·Ollama 연동 | 프롬프트는 템플릿으로 분리하고, 결과는 구조화 출력으로 받아야 코드에서 다루기 쉽다 | [LangChain](ex0914/랭체인.md) · [프롬프트 템플릿](ex0915/프롬프트템플릿.md) · [구조화된 출력](ex0916/구조화된출력.md) · [LLM 연동하기](ex1012/LLM연동하기.md) · [구조화된 출력(SDK)](ex1016/구조화된출력.md) · [LangChain 입문](ex1019/LangChain입문.md) · [LCEL과 Runnable](ex1019/LCEL과Runnable.md) |
 | 문서 처리와 벡터 DB | 문서 로더, 텍스트 분할, 임베딩, Chroma, FAISS, pgvector | 청크 크기·겹침과 임베딩 모델이 검색 품질을 정한다. 저장과 검색은 같은 모델로 | [재귀 텍스트 분할](ex0921/재귀문자텍스트분할.md) · [OpenAI 임베딩](ex0922/OpenAI임베딩.md) · [Chroma](ex0922/크로마벡터스토어.md) · [임베딩과 벡터 DB](ex1015/임베딩과벡터DB.md) |
-| 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터 | 답이 틀리면 검색부터 의심한다: 검색 개수(k) → 임계값 → 청크 → 리랭커 순서로 확인 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) · [LangChain으로 RAG](ex1020/LangChain으로RAG.md) |
-| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지, 리듀서, 조건부 엣지·반복, 병렬·Send·Command, 런타임 컨텍스트, ToolNode ReAct, 체크포인터·Store, interrupt·RetryPolicy·서브그래프), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어(요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기), 단기·장기 메모리(PostgreSQL 영구 저장), Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [LangGraph 기본](ex1023/LangGraph기본.md) · [LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md) · [LangGraph 에이전트와 운영](ex1023/LangGraph에이전트와운영.md) · [에이전트 데이터 관리](ex1023/에이전트데이터관리.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) · [단기·장기 메모리](ex1021/단기장기메모리.md) · [미들웨어](ex1021/미들웨어.md) |
+| 검색과 RAG | 리트리버(MMR, 앙상블, 문맥 압축, 부모 문서), 리랭커, RAG 파이프라인, RAGAS 평가 데이터, 그래프 DB(Neo4j·Cypher), GraphRAG(지식 그래프 추출·`VectorCypherRetriever`·Text2Cypher), 산출물 지식 카드 에이전트 | 답이 틀리면 검색부터 의심한다: 검색 개수(k) → 임계값 → 청크 → 리랭커 순서로 확인. 여러 문서를 잇는 질문과 "몇 개·모두"는 그래프로 | [리랭커 RAG](ex0928/RAG실습.md) · [RAG 기본 파이프라인](ex0929/RAG기본파이프라인.md) · [RAG 실습 2](ex0930/RAG실습.md) · [RAG](ex1015/RAG.md) · [LangChain으로 RAG](ex1020/LangChain으로RAG.md) · [그래프 DB와 GraphRAG](ex1030/그래프DB와GraphRAG.md) · [지식 자산화 GraphRAG 에이전트](ex1102/지식자산화GraphRAG에이전트.md) |
+| 도구 호출과 에이전트 | 챗봇과 에이전트의 차이, 하네스, 에이전트 설계 과정, 멀티 에이전트 오케스트레이션 패턴, LangGraph(상태·노드·엣지, 리듀서, 조건부 엣지·반복, 병렬·Send·Command, 런타임 컨텍스트, ToolNode ReAct, 체크포인터·Store, interrupt·RetryPolicy·서브그래프), 웹 검색·코딩·RAG 에이전트, create_agent 미들웨어(요약·사람 승인·호출 제한·재시도·대체 모델·개인정보 가리기), 단기·장기 메모리(PostgreSQL 영구 저장), Function·빌트인·MCP 도구, 다중 LLM, ReAct, Human-in-the-loop, 멀티 에이전트 패턴(라우터·감독자·Map-Reduce·작성자-비평가), 오케스트레이션 4패턴(순차·슈퍼바이저·피드백 루프·계층), LangSmith 트레이싱 | LLM은 무엇을 할지 결정하고, 실행은 내 코드가 한다. 모든 반복에는 횟수 상한 | [랭그래프 기본](ex1001/랭그래프기본개념.md) · [LangGraph 기본](ex1023/LangGraph기본.md) · [LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md) · [LangGraph 에이전트와 운영](ex1023/LangGraph에이전트와운영.md) · [에이전트 데이터 관리](ex1023/에이전트데이터관리.md) · [웹 검색 에이전트](ex1006/웹검색에이전트.md) · [RAG 에이전트](ex1008/RAG에이전트그래프.md) · [빌트인 툴과 MCP](ex1013/빌트인툴과MCP.md) · [다중 LLM과 ReAct](ex1016/다중LLM과ReAct.md) · [AI 에이전트 이론](ex1019/AI에이전트이론.md) · [도구 호출과 MCP](ex1019/도구호출과MCP.md) · [다중 LLM·ReAct (LangChain)](ex1020/다중LLM과ReAct_LangChain.md) · [단기·장기 메모리](ex1021/단기장기메모리.md) · [미들웨어](ex1021/미들웨어.md) · [다중 LLM·ReAct (LangGraph)](ex1030/다중LLM과ReAct_LangGraph.md) · [멀티 에이전트 패턴](ex1030/멀티에이전트패턴.md) · [오케스트레이션 패턴과 LangSmith](ex1030/오케스트레이션패턴과LangSmith.md) |
 | 웹 서비스 | FastAPI(라우팅, 검증, 템플릿, 파일 업로드), Streamlit, 에이전트·RAG를 REST API로 서비스 | 입력 검증은 타입 힌트로, 외부에서 온 값(파일 이름 등)은 그대로 믿지 않는다 | [FastAPI와 Streamlit](ex0910/streamlit_fastapi.md) · [요청 본문과 검증](ex1014/요청본문과검증.md) · [AI 에이전트 서버](ex1015/FastAPI_AI에이전트서버.md) |
 | 웹 데이터 수집 | requests·BeautifulSoup, 공공·네이버 Open API, Selenium | HTML에 내용이 있으면 requests, 자바스크립트가 그리면 Selenium. 수집한 남의 글과 키는 공개 주의 | [정적 수집](ex1013/정적웹수집.md) · [오픈 API 수집](ex1013/오픈API수집.md) · [동적 수집](ex1013/동적웹수집.md) |
 
@@ -37,6 +37,9 @@
 - 장기 메모리를 시험할 때는 **처음 쓰는 대화방**으로 묻는다. 이미 대화가 쌓인 방에서는 모델이 단기 메모리만 보고 답해서 장기 메모리 조회가 일어나지 않았다. ([10/21](ex1021/단기장기메모리.md))
 - 사람 승인으로 멈췄다 재개하면 **노드가 처음부터 다시 실행된다.** 승인 노드의 로그가 두 번 찍혔다. `interrupt()` 앞에는 결제·DB 쓰기 같은 동작을 두지 않는다. ([10/23](ex1023/LangGraph에이전트와운영.md))
 - 구조화 출력은 **형식만 보장한다.** 스키마 검증을 통과해도 값이 맞는지는 도구 결과와 따로 비교한다. ([10/19](ex1019/도구호출과MCP.md))
+- **합계·비교에 쓸 숫자는 코드가 계산한다.** 예산 비교(`<=`)는 코드로 했지만 총액을 LLM이 78,000원으로 잘못 더해(실제 96,000원) 예산 초과 계획이 통과됐다. ([10/30](ex1030/오케스트레이션패턴과LangSmith.md))
+- 슈퍼바이저 LLM은 **끝내야 할 때를 모를 수 있다.** 세 번 모두 FINISH를 고르지 않고 같은 담당자를 5번까지 불렀다. 상한을 두고, 처리된 항목은 코드가 표시해서 넘긴다. ([10/30](ex1030/오케스트레이션패턴과LangSmith.md))
+- 도구 실패는 빈 값이 아니라 **예외로** 알린다. 빈 문자열이 오자 모델이 검증 없이 답을 만들었고, `ToolException`으로 바꾸자 "모른다"고 답했다. ([10/30](ex1030/다중LLM과ReAct_LangGraph.md))
 - LLM이 호출하는 도구는 **입력 크기와 실행 시간에 상한**을 둔다. 계산기 도구에 큰 거듭제곱을 넣자 서버가 멈췄다. ([10/15](ex1015/FastAPI_AI에이전트서버.md))
 
 **RAG와 검색**
@@ -45,6 +48,8 @@
 - 같은 문서를 다시 넣으면 그대로 **중복 저장**된다. 저장 전에 중복을 확인한다. ([10/08](ex1008/벡터DB저장과검색.md), [10/15](ex1015/RAG.md))
 - **모델이 모르는 최신 용어는 그럴듯하게 지어낸다.** GPT·EXAONE·Llama 모두 "LCEL"을 매번 다른 약자로 설명했고, 설명 문서를 context로 넣은 RAG 체인만 맞게 답했다. ([10/19](ex1019/LCEL과Runnable.md))
 - 웹 검색 도구를 붙여도 **"오늘" 같은 날짜 조건은 느슨하게 처리된다.** 오늘 소식을 물었는데 몇 달 전 기사가 섞였다. 출처 날짜를 확인한다. ([10/19](ex1019/도구호출과MCP.md))
+- **GraphRAG도 근거를 다 쓰지는 않는다.** 근거의 관계 사실에 있던 사람을 빠뜨렸고, 벡터 RAG는 그래프에 없는 관계를 "근거 경로"로 지어냈다. "몇 명·모두"는 Cypher(Text2Cypher)로 센다. ([10/30](ex1030/그래프DB와GraphRAG.md))
+- LLM이 문서에서 뽑은 지식은 **사람이 확인한 뒤** 쌓는다. 설계서에서 일어나지 않은 "문제해결" 카드가 만들어졌고, 에이전트가 그 카드를 출처까지 붙여 답했다. ([11/02](ex1102/지식자산화GraphRAG에이전트.md))
 - "문서에 없는 답"은 임계값만이 아니라 **시스템 프롬프트로도** 막는다. ([09/28](ex0928/RAG실습.md))
 
 **웹 서비스와 보안**
@@ -57,7 +62,21 @@
 10월 12일부터는 책 대신 강사님이 직접 만든 자료로 수업이 진행됐습니다.
 
 <details open>
+<summary><b>2026년 11월</b></summary>
+
+### 2026-11-02
+- **[지식 자산화 GraphRAG 에이전트](ex1102/지식자산화GraphRAG에이전트.md)** — 설계서·보고서·이슈 목록에서 지식 카드 추출(Excel은 코드, Word는 LLM), 기술명 정규화, Neo4j 적재, 고정 Cypher 도구 5개 에이전트와 Gradio 데모, 잘못 추출된 카드가 답변에 섞인 사례 · [코드](ex1102/exam15_1.ipynb)
+
+</details>
+
+<details>
 <summary><b>2026년 10월</b></summary>
+
+### 2026-10-30
+- **[다중 LLM과 ReAct (LangGraph)](ex1030/다중LLM과ReAct_LangGraph.md)** — 병렬 fan-out/fan-in 종합, Fail이면 되돌리는 순차 파이프라인, `agent ⇄ tools` ReAct, 도구 실패 처리 3가지(`handle_tool_errors`·실패 라우팅·`RetryPolicy`) · [코드](ex1030/exam12.ipynb)
+- **[멀티 에이전트 설계 패턴 5가지](ex1030/멀티에이전트패턴.md)** — 순차, 라우터, 감독자(`Command` + `create_agent` 하위 에이전트), Map-Reduce(`Send`), 작성자·비평가 루프 + 사람 승인, 미들웨어 vs LangGraph · [코드](ex1030/exam13.ipynb)
+- **[오케스트레이션 패턴과 LangSmith](ex1030/오케스트레이션패턴과LangSmith.md)** — 순차·슈퍼바이저·피드백 루프·계층형, `create_agent`를 노드로 넣는 통역사 함수, LangSmith 트레이싱, FINISH를 못 고른 슈퍼바이저와 틀린 총액 · [코드](ex1030/exam14.ipynb)
+- **[Neo4j 그래프 DB와 GraphRAG](ex1030/그래프DB와GraphRAG.md)** — Cypher(MERGE·멀티홉·경로·집계), `SimpleKGPipeline` 지식 그래프, 벡터 인덱스 `SEARCH`, 벡터 RAG vs GraphRAG 4문항 비교, Text2Cypher, 검색 도구를 고르는 에이전트 · [코드](ex1030/exam15.ipynb)
 
 ### 2026-10-23
 - **[LangGraph 기본](ex1023/LangGraph기본.md)** — State·Node·Edge와 슈퍼스텝, 첫 그래프와 순차 실행, `stream_mode` updates/values, TypedDict·dataclass·Pydantic State와 입력·출력 스키마 · [코드](ex1023/exam8.ipynb)
