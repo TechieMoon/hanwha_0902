@@ -64,6 +64,9 @@
 <details open>
 <summary><b>2026년 11월</b></summary>
 
+### 2026-11-03 ~ 2026-11-13
+- 강의 없음 — 팀 프로젝트, 취업·진로 개인면담, 팀별 중간 점검, 발표 준비·리허설, 최종 발표(11/13)
+
 ### 2026-11-02
 - **[지식 자산화 GraphRAG 에이전트](ex1102/지식자산화GraphRAG에이전트.md)** — 설계서·보고서·이슈 목록에서 지식 카드 추출(Excel은 코드, Word는 LLM), 기술명 정규화, Neo4j 적재, 고정 Cypher 도구 5개 에이전트와 Gradio 데모, 잘못 추출된 카드가 답변에 섞인 사례 · [코드](ex1102/exam15_1.ipynb)
 
@@ -78,11 +81,20 @@
 - **[오케스트레이션 패턴과 LangSmith](ex1030/오케스트레이션패턴과LangSmith.md)** — 순차·슈퍼바이저·피드백 루프·계층형, `create_agent`를 노드로 넣는 통역사 함수, LangSmith 트레이싱, FINISH를 못 고른 슈퍼바이저와 틀린 총액 · [코드](ex1030/exam14.ipynb)
 - **[Neo4j 그래프 DB와 GraphRAG](ex1030/그래프DB와GraphRAG.md)** — Cypher(MERGE·멀티홉·경로·집계), `SimpleKGPipeline` 지식 그래프, 벡터 인덱스 `SEARCH`, 벡터 RAG vs GraphRAG 4문항 비교, Text2Cypher, 검색 도구를 고르는 에이전트 · [코드](ex1030/exam15.ipynb)
 
+### 2026-10-29
+- 강의 없음 — 취업 멘토링
+
+### 2026-10-26 ~ 2026-10-28
+- 강의 없음 — 취업 역량 강화 프로그램
+
 ### 2026-10-23
 - **[LangGraph 기본](ex1023/LangGraph기본.md)** — State·Node·Edge와 슈퍼스텝, 첫 그래프와 순차 실행, `stream_mode` updates/values, TypedDict·dataclass·Pydantic State와 입력·출력 스키마 · [코드](ex1023/exam8.ipynb)
 - **[LangGraph 흐름 제어](ex1023/LangGraph흐름제어.md)** — 리듀서(`operator.add`, `add_messages`), 조건부 엣지와 반복(`recursion_limit`), 병렬 fan-out/fan-in, `Send`, `Command`, 런타임 컨텍스트 · [코드](ex1023/exam9.ipynb)
 - **[LangGraph 에이전트와 운영](ex1023/LangGraph에이전트와운영.md)** — LLM 노드·LLM 라우터·`ToolNode` ReAct, 체크포인터와 상태 이력, `stream_mode` 5가지, `interrupt` 사람 승인, `RetryPolicy`, 서브그래프, 피드백 글쓰기 에이전트 · [코드](ex1023/exam10.ipynb)
 - **[에이전트 데이터 관리](ex1023/에이전트데이터관리.md)** — State·Reducer·Messages·Context·Checkpointer·Store를 데이터 통로로 구분, Store는 코드가 꺼내 줘야 쓰인다 · [코드](ex1023/exam11.ipynb)
+
+### 2026-10-22
+- 강의 없음 — 한화 자체 프로그램 「Soft Skill 성장 사다리 케어」
 
 ### 2026-10-21
 - **[단기·장기 메모리](ex1021/단기장기메모리.md)** — `thread_id`별 대화 기록(checkpointer)과 사용자별 메모장(store), 메모리 없음/단기/단기+장기 비교, PostgreSQL로 재시작 후에도 유지 · [코드](ex1021/exam6.ipynb)
